@@ -18,4 +18,16 @@ class TextStyles {
       );
 
   static TextStyle get light => ralewayStyles.copyWith(fontWeight: FontWeight.w300);
+
+  static TextStyle get black => ralewayStyles.copyWith(
+        fontWeight: FontWeight.w900,
+        fontSize: 20.0,
+        letterSpacing: 6.0,
+      );
+
+  static TextStyle get medium => ralewayStyles.copyWith(
+        fontWeight: FontWeight.w500,
+        fontSize: 10.0,
+        letterSpacing: 2.0,
+      );
 }

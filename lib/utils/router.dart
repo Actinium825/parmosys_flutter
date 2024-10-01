@@ -11,6 +11,7 @@ final router = GoRouter(
   routes: [
     GoRoute(
       path: initialRoute,
+      name: initialRoute,
       builder: (_, __) => const SplashScreen(),
     ),
     GoRoute(
