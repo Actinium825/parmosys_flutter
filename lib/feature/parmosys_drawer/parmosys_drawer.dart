@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/widgets/parmosys_drawer_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/utils/const.dart';
@@ -11,6 +12,11 @@ class ParmosysDrawer extends StatelessWidget {
   const ParmosysDrawer({super.key});
 
   void _onPressExit(BuildContext context) => context.goNamed(initialRoute);
+
+  Future<String> get _getVersionNumber async {
+    final packageInfo = await PackageInfo.fromPlatform();
+    return packageInfo.version;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,6 +95,14 @@ class ParmosysDrawer extends StatelessWidget {
             ),
           ),
           const Spacer(),
+          FutureBuilder<String>(
+            future: _getVersionNumber,
+            builder: (_, snapshot) => Text(
+              'v ${snapshot.data}',
+              style: medium.copyWith(fontSize: 16.0),
+            ),
+          ),
+          const VerticalSpace(space: 8.0),
         ],
       ),
     );
