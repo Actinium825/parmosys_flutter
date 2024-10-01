@@ -7,13 +7,15 @@ class ParmosysDrawerButton extends StatelessWidget {
   const ParmosysDrawerButton({
     required this.label,
     required this.icon,
+    this.iconColor = Colors.white,
     this.suffix,
     this.onTap,
     super.key,
   });
 
   final String label;
-  final Widget icon;
+  final IconData icon;
+  final Color iconColor;
   final Widget? suffix;
   final VoidCallback? onTap;
 
@@ -31,7 +33,11 @@ class ParmosysDrawerButton extends StatelessWidget {
           padding: drawerButtonsPadding,
           child: Row(
             children: [
-              icon,
+              Icon(
+                icon,
+                color: iconColor,
+                size: drawerButtonsIconSize,
+              ),
               const HorizontalSpace(space: 8.0),
               Text(
                 label,

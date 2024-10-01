@@ -44,11 +44,8 @@ class ParmosysDrawer extends StatelessWidget {
               children: [
                 ParmosysDrawerButton(
                   label: darkModeLabel,
-                  icon: const Icon(
-                    Icons.dark_mode_rounded,
-                    color: Colors.yellow,
-                    size: drawerButtonsIconSize,
-                  ),
+                  iconColor: Colors.yellow,
+                  icon: Icons.dark_mode_rounded,
                   suffix: SizedBox(
                     height: drawerButtonsIconSize,
                     child: FittedBox(
@@ -69,11 +66,7 @@ class ParmosysDrawer extends StatelessWidget {
                   // TODO: Add function
                   onTap: () {},
                   label: viewLabel,
-                  icon: const Icon(
-                    Icons.visibility,
-                    color: Colors.white,
-                    size: drawerButtonsIconSize,
-                  ),
+                  icon: Icons.visibility,
                   suffix: Text(
                     gridViewValue,
                     style: medium.copyWith(color: viewModeTextColor),
@@ -82,21 +75,15 @@ class ParmosysDrawer extends StatelessWidget {
                 verticalSpace,
                 const ParmosysDrawerButton(
                   label: aboutLabel,
-                  icon: Icon(
-                    Icons.info,
-                    color: categoryPageBackgroundColor,
-                    size: drawerButtonsIconSize,
-                  ),
+                  iconColor: categoryPageBackgroundColor,
+                  icon: Icons.info,
                 ),
                 verticalSpace,
                 ParmosysDrawerButton(
                   label: exitLabel,
                   onTap: () => _onPressExit(context),
-                  icon: const Icon(
-                    Icons.exit_to_app_rounded,
-                    color: Colors.red,
-                    size: drawerButtonsIconSize,
-                  ),
+                  iconColor: Colors.red,
+                  icon: Icons.exit_to_app_rounded,
                 ),
               ],
             ),
