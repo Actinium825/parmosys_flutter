@@ -1,3 +1,6 @@
+# Build files
+**/lib/gen
+
 # Miscellaneous
 *.class
 *.log
