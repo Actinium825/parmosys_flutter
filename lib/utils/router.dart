@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:parmosys_flutter/feature/category_page.dart';
+import 'package:parmosys_flutter/feature/category/category_page.dart';
 import 'package:parmosys_flutter/feature/splash_screen.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 

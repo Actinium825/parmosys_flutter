@@ -8,3 +8,6 @@ const homeDescription = 'experience the revolutionary\nparking monitoring system
 // Category Page
 const hintTextLabel = 'Search an area';
 const categoryPageHeader = ['PLEASE SELECT A', 'CATEGORY'];
+const collegesLabel = 'Colleges';
+const hallsLabel = 'Halls';
+const recreationalLabel = 'Recreational';
