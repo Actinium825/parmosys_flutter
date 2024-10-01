@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/utils/const.dart';
+import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
@@ -22,6 +23,8 @@ class CategoryButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(categoryButtonRadius);
+    final isDarkMode = context.isDarkMode;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -40,7 +43,7 @@ class CategoryButton extends StatelessWidget {
                   height: categoryButtonBackgroundHeight,
                   width: categoryButtonBackgroundWidth,
                   decoration: BoxDecoration(
-                    color: categoryButtonTheme,
+                    color: isDarkMode ? categoryButtonDarkColor : categoryButtonLightColor,
                     borderRadius: borderRadius,
                   ),
                 ),
@@ -60,7 +63,7 @@ class CategoryButton extends StatelessWidget {
         const VerticalSpace(space: 8.0),
         Text(
           label,
-          style: TextStyles.bold.copyWith(color: categoryButtonTheme),
+          style: TextStyles.bold.copyWith(color: isDarkMode ? Colors.white : categoryButtonLightColor),
         )
       ],
     );

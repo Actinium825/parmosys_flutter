@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/utils/const.dart';
+import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
@@ -7,7 +8,7 @@ class ParmosysDrawerButton extends StatelessWidget {
   const ParmosysDrawerButton({
     required this.label,
     required this.icon,
-    this.iconColor = Colors.white,
+    required this.iconColor,
     this.suffix,
     this.onTap,
     super.key,
@@ -22,8 +23,10 @@ class ParmosysDrawerButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(drawerButtonsRadius);
+    final isDarkMode = context.isDarkMode;
+
     return Card(
-      color: drawerButtonsBackgroundColor,
+      color: isDarkMode ? Colors.white : drawerButtonsBackgroundColor,
       elevation: drawerButtonsElevation,
       shape: RoundedRectangleBorder(borderRadius: borderRadius),
       child: InkWell(
@@ -41,7 +44,7 @@ class ParmosysDrawerButton extends StatelessWidget {
               const HorizontalSpace(space: 8.0),
               Text(
                 label,
-                style: TextStyles.medium,
+                style: TextStyles.medium.copyWith(color: isDarkMode ? Colors.black : Colors.white),
               ),
               if (suffix != null) ...[
                 const Spacer(),
