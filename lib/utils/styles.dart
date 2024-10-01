@@ -7,9 +7,15 @@ class TextStyles {
     color: Colors.white,
   );
 
-  static TextStyle get bold => ralewayStyles.copyWith(fontWeight: FontWeight.w700);
+  static TextStyle get bold => ralewayStyles.copyWith(
+        fontWeight: FontWeight.w700,
+        fontSize: 20.0,
+      );
 
-  static TextStyle get extraBold => ralewayStyles.copyWith(fontWeight: FontWeight.w800);
+  static TextStyle get extraBold => ralewayStyles.copyWith(
+        fontWeight: FontWeight.w800,
+        fontSize: 40.0,
+      );
 
   static TextStyle get light => ralewayStyles.copyWith(fontWeight: FontWeight.w300);
 }

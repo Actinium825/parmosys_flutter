@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:parmosys_flutter/splash_screen.dart';
+import 'package:parmosys_flutter/feature/category_page.dart';
+import 'package:parmosys_flutter/feature/splash_screen.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
@@ -11,6 +12,11 @@ final router = GoRouter(
     GoRoute(
       path: initialRoute,
       builder: (_, __) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: CategoryPage.route,
+      name: CategoryPage.route,
+      builder: (_, __) => const CategoryPage(),
     ),
   ],
   initialLocation: initialRoute,
