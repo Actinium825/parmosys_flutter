@@ -3,6 +3,7 @@ import 'package:parmosys_flutter/feature/category/widgets/category_button.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/utils/const.dart';
+import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
@@ -16,9 +17,10 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(searchTextRadius);
     final extraBold = TextStyles.extraBold;
+    final isDarkMode = context.isDarkMode;
 
     return Scaffold(
-      backgroundColor: categoryPageBackgroundColor,
+      backgroundColor: isDarkMode ? homeBackgroundColor : categoryPageBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
@@ -82,7 +84,7 @@ class CategoryPage extends StatelessWidget {
           ),
           Expanded(
             child: Card(
-              color: Colors.white,
+              color: isDarkMode ? categoryPageBottomSheetDarkColor : Colors.white,
               shape: categoryPageBottomSheetShape,
               margin: EdgeInsets.zero,
               child: Row(

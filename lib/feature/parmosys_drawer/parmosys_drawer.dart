@@ -4,6 +4,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/widgets/parmosys_drawer_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/utils/const.dart';
+import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
@@ -20,11 +21,12 @@ class ParmosysDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final medium = TextStyles.medium.copyWith(color: Colors.black);
+    final isDarkMode = context.isDarkMode;
+    final medium = TextStyles.medium.copyWith(color: isDarkMode ? Colors.white : Colors.black);
     const verticalSpace = VerticalSpace(space: 28.0);
 
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: isDarkMode ? drawerDarkColor : Colors.white,
       child: Column(
         children: [
           const Spacer(),
@@ -36,7 +38,7 @@ class ParmosysDrawer extends StatelessWidget {
           const VerticalSpace(space: 20.0),
           Text(
             drawerHeader,
-            style: TextStyles.black.copyWith(color: Colors.black),
+            style: TextStyles.black.copyWith(color: isDarkMode ? Colors.white : Colors.black),
           ),
           const VerticalSpace(space: 4.0),
           Text(
@@ -59,8 +61,8 @@ class ParmosysDrawer extends StatelessWidget {
                         value: false,
                         // TODO: Add function
                         onChanged: (_) {},
-                        inactiveThumbColor: Colors.black,
-                        trackColor: const WidgetStatePropertyAll(Colors.white),
+                        inactiveThumbColor: isDarkMode ? Colors.white : Colors.black,
+                        trackColor: WidgetStatePropertyAll(isDarkMode ? drawerDarkColor : Colors.white),
                         trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                       ),
@@ -73,6 +75,7 @@ class ParmosysDrawer extends StatelessWidget {
                   onTap: () {},
                   label: viewLabel,
                   icon: Icons.visibility,
+                  iconColor: isDarkMode ? Colors.black : Colors.white,
                   suffix: Text(
                     gridViewValue,
                     style: medium.copyWith(color: viewModeTextColor),
