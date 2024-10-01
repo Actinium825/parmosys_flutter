@@ -10,7 +10,7 @@ import 'package:parmosys_flutter/widgets/spacings.dart';
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
-  void _onPressStart(BuildContext context) => context.pushNamed(CategoryPage.route);
+  void _onPressStart(BuildContext context) => context.goNamed(CategoryPage.route);
 
   @override
   Widget build(BuildContext context) {

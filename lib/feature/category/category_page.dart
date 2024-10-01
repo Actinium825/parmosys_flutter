@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/feature/category/widgets/category_button.dart';
+import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
@@ -23,7 +24,7 @@ class CategoryPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         actionsIconTheme: const IconThemeData(color: Colors.white),
       ),
-      endDrawer: const Drawer(),
+      endDrawer: const ParmosysDrawer(),
       body: Column(
         children: [
           Padding(

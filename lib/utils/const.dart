@@ -28,3 +28,14 @@ const categoryButtonWidth = 120.0;
 const categoryButtonBackgroundHeight = 80.0;
 const categoryButtonBackgroundWidth = 88.0;
 const categoryButtonRadius = 24.0;
+
+// Parmosys Drawer
+const logoColor = Color(0xff668b4f);
+const drawerButtonsRadius = 20.0;
+const drawerButtonsBackgroundColor = Color(0xff202020);
+const drawerButtonsElevation = 4.0;
+const drawerButtonsPadding = EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0);
+const logoScale = 3.5;
+const drawerBodyPadding = EdgeInsets.symmetric(horizontal: 20.0);
+const drawerButtonsIconSize = 16.0;
+const viewModeTextColor = Color(0xff878787);
