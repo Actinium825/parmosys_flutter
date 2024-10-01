@@ -1,3 +1,5 @@
+const initialRoute = '/';
+
 // Home
 const startButtonLabel = 'START';
 const homeTitle = 'WELCOME\nTO\nBULSU PARMOSYS';
