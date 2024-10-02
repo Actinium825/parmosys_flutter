@@ -19,6 +19,8 @@ class TextStyles {
 
   static TextStyle get light => ralewayStyles.copyWith(fontWeight: FontWeight.w300);
 
+  static TextStyle get regular => ralewayStyles.copyWith(fontWeight: FontWeight.w400);
+
   static TextStyle get black => ralewayStyles.copyWith(
         fontWeight: FontWeight.w900,
         fontSize: 20.0,

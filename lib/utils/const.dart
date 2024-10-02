@@ -47,3 +47,6 @@ const drawerDarkColor = Color(0xff282727);
 
 // Area Page
 const areaPageCardRadius = 40.0;
+const areaPageHeaderImageScale = 3.0;
+const areaPagePadding = 16.0;
+const areaPageHeaderSpacing = 3.0;

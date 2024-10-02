@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/area/area_page.dart';
-import 'package:parmosys_flutter/feature/category/widgets/category_button.dart';
+import 'package:parmosys_flutter/feature/category/category_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/selected_category_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';

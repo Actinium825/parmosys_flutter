@@ -25,6 +25,7 @@ class CategoryButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(categoryButtonRadius);
     final isDarkMode = context.isDarkMode;
+    final imageUrl = parkingCategory.imageUrl;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -50,10 +51,13 @@ class CategoryButton extends StatelessWidget {
                 Positioned(
                   top: imageTopPosition,
                   left: imageLeftPosition,
-                  child: Image.asset(
-                    parkingCategory.imageUrl,
-                    width: imageSize,
-                    height: imageSize,
+                  child: Hero(
+                    tag: imageUrl,
+                    child: Image.asset(
+                      imageUrl,
+                      width: imageSize,
+                      height: imageSize,
+                    ),
                   ),
                 ),
               ],
