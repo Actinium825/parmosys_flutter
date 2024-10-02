@@ -89,7 +89,7 @@ class ParmosysDrawer extends ConsumerWidget {
                 verticalSpace,
                 const ParmosysDrawerButton(
                   label: aboutLabel,
-                  iconColor: categoryPageBackgroundColor,
+                  iconColor: lightBackgroundColor,
                   icon: Icons.info,
                 ),
                 verticalSpace,

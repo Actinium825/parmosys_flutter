@@ -21,3 +21,6 @@ const viewLabel = 'VIEW';
 const exitLabel = 'EXIT';
 const aboutLabel = 'ABOUT';
 const gridViewValue = 'GRID VIEW >';
+
+// Area Page
+const areaPageHeaders = ['PLEASE SELECT', 'AN AREA'];
