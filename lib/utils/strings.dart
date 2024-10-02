@@ -21,6 +21,8 @@ const gridViewValue = 'GRID VIEW >';
 
 // Area Page
 const areaPageHeaders = ['PLEASE SELECT', 'AN AREA'];
+const swipeToSelectLabel = 'SWIPE TO SELECT';
+const availableSpotLabel = 'Total Available Spot: 0';
 
 // Parking Category Enum
 const collegesHeader = 'Colleges';
