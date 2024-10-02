@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/utils/const.dart';
+import 'package:parmosys_flutter/utils/enums.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
 class CategoryButton extends StatelessWidget {
   const CategoryButton({
-    required this.label,
-    required this.image,
+    required this.parkingCategory,
     required this.onTap,
     this.imageSize = collegesImageSize,
     this.imageTopPosition = 24.0,
@@ -15,11 +15,10 @@ class CategoryButton extends StatelessWidget {
     super.key,
   });
 
-  final String label;
-  final String image;
+  final ParkingCategory parkingCategory;
   final double imageSize;
   final double imageTopPosition;
-  final VoidCallback onTap;
+  final ValueChanged<ParkingCategory> onTap;
   final double? imageLeftPosition;
 
   @override
@@ -34,7 +33,7 @@ class CategoryButton extends StatelessWidget {
           height: categoryButtonHeight,
           width: categoryButtonWidth,
           child: InkWell(
-            onTap: onTap,
+            onTap: () => onTap(parkingCategory),
             borderRadius: borderRadius,
             splashColor: lightBackgroundColor,
             child: Stack(
@@ -52,7 +51,7 @@ class CategoryButton extends StatelessWidget {
                   top: imageTopPosition,
                   left: imageLeftPosition,
                   child: Image.asset(
-                    image,
+                    parkingCategory.imageUrl,
                     width: imageSize,
                     height: imageSize,
                   ),
@@ -63,7 +62,7 @@ class CategoryButton extends StatelessWidget {
         ),
         const VerticalSpace(space: 8.0),
         Text(
-          label,
+          parkingCategory.header,
           style: TextStyles.bold.copyWith(color: isDarkMode ? Colors.white : categoryButtonLightColor),
         )
       ],

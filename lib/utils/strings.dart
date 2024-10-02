@@ -9,9 +9,6 @@ const homeDescription = 'experience the revolutionary\nparking monitoring system
 // Category Page
 const hintTextLabel = 'Search an area';
 const categoryPageHeader = ['PLEASE SELECT A', 'CATEGORY'];
-const collegesLabel = 'Colleges';
-const hallsLabel = 'Halls';
-const recreationalLabel = 'Recreational';
 
 // Parmosys Drawer
 const drawerHeader = 'BULSU PARMOSYS';
@@ -24,3 +21,11 @@ const gridViewValue = 'GRID VIEW >';
 
 // Area Page
 const areaPageHeaders = ['PLEASE SELECT', 'AN AREA'];
+
+// Parking Category Enum
+const collegesHeader = 'Colleges';
+const hallsHeader = 'Halls';
+const recreationalHeader = 'Recreational';
+const collegesAreas = ['CHTM', 'CICT', 'College of Law', 'CSSP'];
+const hallsAreas = ['Federizo Hall', 'Natividad Hall', 'Carpio Hall'];
+const recreationalAreas = ['Activity Center', 'Heroes Park', 'Library', 'University Hostel'];
