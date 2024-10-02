@@ -8,6 +8,7 @@ class CategoryButton extends StatelessWidget {
   const CategoryButton({
     required this.label,
     required this.image,
+    required this.onTap,
     this.imageSize = collegesImageSize,
     this.imageTopPosition = 24.0,
     this.imageLeftPosition,
@@ -18,6 +19,7 @@ class CategoryButton extends StatelessWidget {
   final String image;
   final double imageSize;
   final double imageTopPosition;
+  final VoidCallback onTap;
   final double? imageLeftPosition;
 
   @override
@@ -32,10 +34,9 @@ class CategoryButton extends StatelessWidget {
           height: categoryButtonHeight,
           width: categoryButtonWidth,
           child: InkWell(
-            // TODO: Add function
-            onTap: () {},
+            onTap: onTap,
             borderRadius: borderRadius,
-            splashColor: categoryPageBackgroundColor,
+            splashColor: lightBackgroundColor,
             child: Stack(
               alignment: Alignment.center,
               children: [

@@ -16,7 +16,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const spacer = Spacer();
     return Scaffold(
-      backgroundColor: homeBackgroundColor,
+      backgroundColor: darkBackgroundColor,
       body: Padding(
         padding: homePadding,
         child: Column(
