@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/widgets/parmosys_drawer_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
+import 'package:parmosys_flutter/providers/selected_theme_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
-class ParmosysDrawer extends StatelessWidget {
+class ParmosysDrawer extends ConsumerWidget {
   const ParmosysDrawer({super.key});
 
   void _onPressExit(BuildContext context) => context.goNamed(initialRoute);
@@ -19,8 +21,11 @@ class ParmosysDrawer extends StatelessWidget {
     return packageInfo.version;
   }
 
+  void _onChangeThemeMode(WidgetRef ref, bool isDarkMode) =>
+      ref.read(selectedThemeProvider.notifier).changeThemeMode(isDarkMode);
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final isDarkMode = context.isDarkMode;
     final medium = TextStyles.medium.copyWith(color: isDarkMode ? Colors.white : Colors.black);
     const verticalSpace = VerticalSpace(space: 28.0);
@@ -58,10 +63,10 @@ class ParmosysDrawer extends StatelessWidget {
                     height: drawerButtonsIconSize,
                     child: FittedBox(
                       child: Switch(
-                        value: false,
-                        // TODO: Add function
-                        onChanged: (_) {},
-                        inactiveThumbColor: isDarkMode ? Colors.white : Colors.black,
+                        value: ref.read(selectedThemeProvider) == ThemeMode.dark,
+                        onChanged: (isDarkMode) => _onChangeThemeMode(ref, isDarkMode),
+                        inactiveThumbColor: Colors.black,
+                        activeColor: Colors.white,
                         trackColor: WidgetStatePropertyAll(isDarkMode ? drawerDarkColor : Colors.white),
                         trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

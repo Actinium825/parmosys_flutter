@@ -1,4 +1,5 @@
 const initialRoute = '/';
+const themeModeKey = 'themeMode';
 
 // Home
 const startButtonLabel = 'START';

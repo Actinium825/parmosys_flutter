@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      riverpod_generator:
+        enabled: true
+        generate_for:
+          exclude:
+            - lib
+          include:
+            - lib/providers/*
