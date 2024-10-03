@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:parmosys_flutter/feature/area/area_card.dart';
+import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/selected_category_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/enums.dart';
@@ -9,33 +12,66 @@ import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/parmosys_scaffold.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
-class AreaPage extends ConsumerWidget {
+class AreaPage extends ConsumerStatefulWidget {
   const AreaPage({super.key});
 
   static const route = 'area';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AreaPage> createState() => _AreaPageState();
+}
+
+class _AreaPageState extends ConsumerState<AreaPage> {
+  late final ValueNotifier<int> _currentIndexNotifier;
+
+  @override
+  void initState() {
+    _currentIndexNotifier = ValueNotifier(0);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _currentIndexNotifier.dispose();
+    super.dispose();
+  }
+
+  String _areaImageUrl(int index, ParkingCategory selectedCategory) {
+    const png = Assets.png;
+    return switch (selectedCategory) {
+      ParkingCategory.colleges => [png.chtm.path, png.cict.path, png.law.path, png.cssp.path][index],
+      ParkingCategory.halls => png.hall.path,
+      ParkingCategory.recreational => [
+          png.activityCenter.path,
+          png.heroesPark.path,
+          png.library.path,
+          png.universityHostel.path
+        ][index],
+    };
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final selectedCategory = ref.watch(selectedCategoryProvider.notifier).state ?? ParkingCategory.colleges;
+    final areas = selectedCategory.areas;
+    final areaCount = areas.length;
     final imageUrl = selectedCategory.imageUrl;
-    final isDarkMode = context.isDarkMode;
-    const verticalSpace = VerticalSpace(space: 32.0);
-    final color = isDarkMode ? Colors.white : Colors.black;
+    final color = context.isDarkMode ? Colors.white : Colors.black;
 
     return ParmosysScaffold(
       header: areaPageHeaders,
       body: const VerticalSpace(space: 40.0),
       isBackButtonShown: true,
       cardRadius: areaPageCardRadius,
-      cardBody: Padding(
-        padding: EdgeInsets.only(
-          left: selectedCategory != ParkingCategory.halls ? 0 : areaPagePadding,
-          right: areaPagePadding,
-        ),
-        child: Column(
-          children: [
-            verticalSpace,
-            Row(
+      cardBody: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Padding(
+            padding: EdgeInsets.only(
+              left: selectedCategory != ParkingCategory.halls ? 0 : areaPagePadding,
+              right: areaPagePadding,
+            ),
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Hero(
@@ -60,7 +96,7 @@ class AreaPage extends ConsumerWidget {
                       ),
                       Text(
                         // TODO: Update value
-                        availableSpotLabel,
+                        totalAvailableSpotLabel,
                         style: TextStyles.regular.copyWith(color: color),
                       ),
                     ],
@@ -68,14 +104,44 @@ class AreaPage extends ConsumerWidget {
                 ),
               ],
             ),
-            const Spacer(),
-            Text(
-              swipeToSelectLabel,
-              style: TextStyles.medium,
+          ),
+          FlutterCarousel.builder(
+            itemCount: areaCount,
+            itemBuilder: (_, index, __) => AreaCard(
+              isSelected: _currentIndexNotifier.value == index,
+              area: areas[index],
+              imageUrl: _areaImageUrl(index, selectedCategory),
             ),
-            verticalSpace,
-          ],
-        ),
+            options: FlutterCarouselOptions(
+              viewportFraction: carouselViewportFraction,
+              aspectRatio: carouselAspectRatio,
+              enlargeFactor: carouselEnlargeFactor,
+              enlargeCenterPage: true,
+              showIndicator: false,
+              onPageChanged: (index, _) => _currentIndexNotifier.value = index,
+            ),
+          ),
+          SizedBox(
+            width: carouselIndicatorWidth,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(
+                areaCount,
+                (index) => ValueListenableBuilder<int>(
+                  valueListenable: _currentIndexNotifier,
+                  builder: (_, currentIndex, __) => CircleAvatar(
+                    radius: carouselIndicatorRadius,
+                    backgroundColor: currentIndex == index ? activeIndicatorColor : inactiveIndicatorColor,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Text(
+            swipeToSelectLabel,
+            style: TextStyles.medium.copyWith(color: color),
+          ),
+        ],
       ),
     );
   }

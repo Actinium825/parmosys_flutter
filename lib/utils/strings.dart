@@ -22,12 +22,13 @@ const gridViewValue = 'GRID VIEW >';
 // Area Page
 const areaPageHeaders = ['PLEASE SELECT', 'AN AREA'];
 const swipeToSelectLabel = 'SWIPE TO SELECT';
-const availableSpotLabel = 'Total Available Spot: 0';
+const totalAvailableSpotLabel = 'Total $availableSpotLabel';
+const availableSpotLabel = 'Available Spot: 0';
 
 // Parking Category Enum
 const collegesHeader = 'Colleges';
 const hallsHeader = 'Halls';
 const recreationalHeader = 'Recreational';
-const collegesAreas = ['CHTM', 'CICT', 'College of Law', 'CSSP'];
+const collegesAreas = ['C  H  T  M', 'C  I  C  T', 'College of Law', 'C  S  S  P'];
 const hallsAreas = ['Federizo Hall', 'Natividad Hall', 'Carpio Hall'];
 const recreationalAreas = ['Activity Center', 'Heroes Park', 'Library', 'University Hostel'];
