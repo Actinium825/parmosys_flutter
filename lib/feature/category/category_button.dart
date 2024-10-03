@@ -44,7 +44,7 @@ class CategoryButton extends StatelessWidget {
                   height: categoryButtonBackgroundHeight,
                   width: categoryButtonBackgroundWidth,
                   decoration: BoxDecoration(
-                    color: isDarkMode ? categoryButtonDarkColor : categoryButtonLightColor,
+                    color: isDarkMode ? cardButtonDarkColor : cardButtonLightColor,
                     borderRadius: borderRadius,
                   ),
                 ),
@@ -67,7 +67,7 @@ class CategoryButton extends StatelessWidget {
         const VerticalSpace(space: 8.0),
         Text(
           parkingCategory.header,
-          style: TextStyles.bold.copyWith(color: isDarkMode ? Colors.white : categoryButtonLightColor),
+          style: TextStyles.bold.copyWith(color: isDarkMode ? Colors.white : cardButtonLightColor),
         )
       ],
     );
