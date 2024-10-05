@@ -57,6 +57,8 @@ class _AreaPageState extends ConsumerState<AreaPage> {
     final areaCount = areas.length;
     final imageUrl = selectedCategory.imageUrl;
     final color = context.isDarkMode ? Colors.white : Colors.black;
+    const verticalSpaceLarge = VerticalSpace(space: 64.0);
+    const verticalSpaceSmall = VerticalSpace(space: 16.0);
 
     return ParmosysScaffold(
       header: areaPageHeaders,
@@ -106,7 +108,7 @@ class _AreaPageState extends ConsumerState<AreaPage> {
               ],
             ),
           ),
-          const VerticalSpace(space: 16.0),
+          verticalSpaceSmall,
           FlutterCarousel.builder(
             itemCount: areaCount,
             itemBuilder: (_, index, __) => AreaCard(
@@ -123,7 +125,7 @@ class _AreaPageState extends ConsumerState<AreaPage> {
               onPageChanged: (index, _) => _currentIndexNotifier.value = index,
             ),
           ),
-          const VerticalSpace(space: 64.0),
+          verticalSpaceLarge,
           Center(
             child: SizedBox(
               width: carouselIndicatorWidth,
@@ -142,13 +144,13 @@ class _AreaPageState extends ConsumerState<AreaPage> {
               ),
             ),
           ),
-          const VerticalSpace(space: 64.0),
+          verticalSpaceLarge,
           Text(
             swipeToSelectLabel,
             textAlign: TextAlign.center,
             style: TextStyles.medium.copyWith(color: color),
           ),
-          const VerticalSpace(space: 16.0),
+          verticalSpaceSmall,
         ],
       ),
     );
