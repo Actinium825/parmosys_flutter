@@ -32,7 +32,7 @@ const sortByLabel = 'SORT BY';
 const collegesHeader = 'Colleges';
 const hallsHeader = 'Halls';
 const recreationalHeader = 'Recreational';
-const collegesAreas = ['C  H  T  M', 'C  I  C  T', 'College of Law', 'C  S  S  P'];
+const collegesAreas = ['CHTM', 'CICT', 'College of Law', 'CSSP'];
 const hallsAreas = ['Federizo Hall', 'Natividad Hall', 'Carpio Hall'];
 const recreationalAreas = ['Activity Center', 'Heroes Park', 'Library', 'University Hostel'];
 

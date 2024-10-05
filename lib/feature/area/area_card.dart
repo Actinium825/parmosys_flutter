@@ -31,8 +31,14 @@ class AreaCard extends ConsumerWidget {
     context.pushNamed(ParkingSpacePage.route);
   }
 
+  bool _isAcronym() {
+    final letters = area.split('');
+    return letters.every((letter) => letter == letter.toUpperCase());
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final bold = TextStyles.bold.copyWith(letterSpacing: _isAcronym() ? 10 : null);
     return Card(
       color: _cardColor(context),
       elevation: defaultElevation,
@@ -48,7 +54,7 @@ class AreaCard extends ConsumerWidget {
                   alignment: Alignment.topLeft,
                   child: Text(
                     area,
-                    style: TextStyles.bold,
+                    style: bold,
                   ),
                 ),
               Center(
@@ -62,7 +68,7 @@ class AreaCard extends ConsumerWidget {
                 child: Text(
                   // TODO: Update value
                   isSelected ? availableSpotLabel : area,
-                  style: isSelected ? TextStyles.medium.copyWith(fontSize: 12.0) : TextStyles.bold,
+                  style: isSelected ? TextStyles.medium.copyWith(fontSize: 12.0) : bold,
                 ),
               )
             ],
