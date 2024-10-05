@@ -24,6 +24,7 @@ const areaPageHeaders = ['PLEASE SELECT', 'AN AREA'];
 const swipeToSelectLabel = 'SWIPE TO SELECT';
 const totalAvailableSpotLabel = 'Total $availableSpotLabel';
 const availableSpotLabel = 'Available Spot: 0';
+const sortByLabel = 'SORT BY';
 
 // Parking Category Enum
 const collegesHeader = 'Colleges';

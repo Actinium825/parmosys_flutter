@@ -27,7 +27,7 @@ class ParmosysDrawerButton extends StatelessWidget {
 
     return Card(
       color: isDarkMode ? Colors.white : drawerButtonsBackgroundColor,
-      elevation: drawerButtonsElevation,
+      elevation: defaultElevation,
       shape: RoundedRectangleBorder(borderRadius: borderRadius),
       child: InkWell(
         onTap: onTap,

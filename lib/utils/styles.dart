@@ -12,6 +12,11 @@ class TextStyles {
         fontSize: 20.0,
       );
 
+  static TextStyle get semiBold => ralewayStyles.copyWith(
+        fontWeight: FontWeight.w600,
+        fontSize: 16.0,
+      );
+
   static TextStyle get extraBold => ralewayStyles.copyWith(
         fontWeight: FontWeight.w800,
         fontSize: 40.0,
