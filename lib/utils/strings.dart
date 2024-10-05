@@ -1,5 +1,6 @@
 const initialRoute = '/';
 const themeModeKey = 'themeMode';
+const viewModeKey = 'viewMode';
 
 // Home
 const startButtonLabel = 'START';
@@ -18,6 +19,7 @@ const viewLabel = 'VIEW';
 const exitLabel = 'EXIT';
 const aboutLabel = 'ABOUT';
 const gridViewValue = 'GRID VIEW >';
+const listViewValue = 'LIST VIEW >';
 
 // Area Page
 const areaPageHeaders = ['PLEASE SELECT', 'AN AREA'];

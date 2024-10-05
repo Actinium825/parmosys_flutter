@@ -3,6 +3,7 @@ import 'package:parmosys_flutter/feature/area/area_list_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/enums.dart';
+import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
@@ -50,7 +51,7 @@ class AreaList extends StatelessWidget {
                 Text(
                   sortByLabel,
                   style: TextStyles.bold.copyWith(
-                    color: Colors.black,
+                    color: context.isDarkMode ? Colors.white : Colors.black,
                     fontSize: 12.0,
                   ),
                 ),

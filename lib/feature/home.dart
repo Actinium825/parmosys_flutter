@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/providers/selected_theme_provider.dart';
+import 'package:parmosys_flutter/providers/selected_view_provider.dart';
 import 'package:parmosys_flutter/utils/router.dart';
 
 class Home extends ConsumerStatefulWidget {
@@ -15,6 +16,7 @@ class _HomeState extends ConsumerState<Home> {
   @override
   void initState() {
     ref.read(selectedThemeProvider.notifier).loadSavedTheme();
+    ref.read(selectedViewProvider.notifier).loadSavedView();
     super.initState();
   }
 
