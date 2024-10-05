@@ -8,6 +8,7 @@ const parmosysScaffoldPadding = EdgeInsets.symmetric(horizontal: 16.0);
 const cardButtonLightColor = Color(0xff575656);
 const cardButtonDarkColor = Color(0xff353535);
 const additionalHeaderPadding = EdgeInsets.symmetric(horizontal: 24.0);
+const defaultElevation = 4.0;
 
 // Start Page
 const startPagePadding = EdgeInsets.symmetric(horizontal: 16.0);
@@ -37,7 +38,6 @@ const categoryPageCardRadius = 64.0;
 const logoColor = Color(0xff668b4f);
 const drawerButtonsRadius = 20.0;
 const drawerButtonsBackgroundColor = Color(0xff202020);
-const drawerButtonsElevation = 4.0;
 const drawerButtonsPadding = EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0);
 const logoScale = 3.5;
 const drawerBodyPadding = EdgeInsets.symmetric(horizontal: 20.0);
@@ -56,6 +56,10 @@ const carouselEnlargeFactor = 0.4;
 const carouselAspectRatio = 1.6;
 const carouselViewportFraction = 0.5;
 const areaCardPadding = EdgeInsets.all(8.0);
-const areaCardElevation = 4.0;
 const activeIndicatorColor = Color(0xff89b277);
 const inactiveIndicatorColor = Color(0xff7b7b7b);
+const areaListButtonColor = Color(0xff403e3e);
+const areaListButtonRadius = 24.0;
+const areaListPadding = EdgeInsets.symmetric(horizontal: 16.0);
+const areaListButtonPadding = EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0);
+const areaListImageScale = 4.0;

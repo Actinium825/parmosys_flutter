@@ -26,7 +26,7 @@ class AreaCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Card(
       color: _cardColor(context),
-      elevation: areaCardElevation,
+      elevation: defaultElevation,
       child: Padding(
         padding: areaCardPadding,
         child: Stack(
