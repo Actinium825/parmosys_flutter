@@ -7,8 +7,8 @@ import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
+class StartPage extends StatelessWidget {
+  const StartPage({super.key});
 
   void _onPressStart(BuildContext context) => context.goNamed(CategoryPage.route);
 
@@ -18,23 +18,27 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: Padding(
-        padding: homePadding,
+        padding: startPagePadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             spacer,
             Image.asset(Assets.png.lancer.path),
             const VerticalSpace(space: 32.0),
-            Text(
-              homeTitle,
-              style: TextStyles.extraBold,
+            FittedBox(
+              child: Text(
+                homeTitle,
+                style: TextStyles.extraBold,
+              ),
             ),
             const VerticalSpace(space: 16.0),
-            Text(
-              homeDescription,
-              style: TextStyles.light.copyWith(fontSize: 16),
+            FittedBox(
+              child: Text(
+                homeDescription,
+                style: TextStyles.light.copyWith(fontSize: 16),
+              ),
             ),
-            const VerticalSpace(space: 80.0),
+            const Spacer(),
             Center(
               child: ElevatedButton(
                 onPressed: () => _onPressStart(context),

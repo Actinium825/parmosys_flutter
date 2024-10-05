@@ -44,29 +44,31 @@ class ParmosysScaffold extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: isBackButtonShown ? additionalHeaderPadding : EdgeInsets.zero,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        header.first,
-                        style: extraBold,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            header[1],
-                            style: extraBold,
-                          ),
-                          const Icon(
-                            Icons.location_on_rounded,
-                            color: locationButtonColor,
-                            size: locationIconSize,
-                          ),
-                        ],
-                      ),
-                    ],
+                FittedBox(
+                  child: Padding(
+                    padding: isBackButtonShown ? additionalHeaderPadding : EdgeInsets.zero,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          header.first,
+                          style: extraBold,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              header[1],
+                              style: extraBold,
+                            ),
+                            const Icon(
+                              Icons.location_on_rounded,
+                              color: locationButtonColor,
+                              size: locationIconSize,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const VerticalSpace(space: 20.0),

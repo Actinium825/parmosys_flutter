@@ -24,12 +24,13 @@ class CategoryPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ParmosysScaffold(
       header: categoryPageHeader,
-      body: Container(
-        padding: lancerSideImagePadding,
-        alignment: Alignment.centerRight,
-        child: Image.asset(
-          Assets.png.lancerSide.path,
-          scale: lancerSideImageScale,
+      body: Expanded(
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Image.asset(
+            Assets.png.lancerSide.path,
+            width: MediaQuery.of(context).size.width * lancerSideImageMultiplier,
+          ),
         ),
       ),
       cardBody: Row(
