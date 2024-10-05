@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/area/area_card.dart';
-import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/enums.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -37,24 +36,11 @@ class _AreaCarouselState extends ConsumerState<AreaCarousel> {
     super.dispose();
   }
 
-  String _areaImageUrl(int index) {
-    const png = Assets.png;
-    return switch (widget.selectedCategory) {
-      ParkingCategory.colleges => [png.chtm.path, png.cict.path, png.law.path, png.cssp.path][index],
-      ParkingCategory.halls => png.hall.path,
-      ParkingCategory.recreational => [
-          png.activityCenter.path,
-          png.heroesPark.path,
-          png.library.path,
-          png.universityHostel.path
-        ][index],
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
     const verticalSpaceLarge = VerticalSpace(space: 64.0);
-    final areas = widget.selectedCategory.areas;
+    final selectedCategory = widget.selectedCategory;
+    final areas = selectedCategory.areas;
     final areaCount = areas.length;
 
     return Column(
@@ -64,7 +50,7 @@ class _AreaCarouselState extends ConsumerState<AreaCarousel> {
           itemBuilder: (_, index, __) => AreaCard(
             isSelected: _currentIndexNotifier.value == index,
             area: areas[index],
-            imageUrl: _areaImageUrl(index),
+            imageUrl: selectedCategory.cardAreaImageUrl(index),
           ),
           options: FlutterCarouselOptions(
             viewportFraction: carouselViewportFraction,
