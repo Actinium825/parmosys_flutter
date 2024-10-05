@@ -16,7 +16,7 @@ class AreaList extends StatelessWidget {
 
   final ParkingCategory selectedCategory;
 
-  String _areaImageUrl(int index) {
+  String _smallAreaImageUrl(int index) {
     const png = Assets.png;
     return switch (selectedCategory) {
       ParkingCategory.colleges => [
@@ -69,7 +69,8 @@ class AreaList extends StatelessWidget {
             separatorBuilder: (_, index) => const VerticalSpace(space: 32.0),
             itemBuilder: (_, index) => AreaListButton(
               area: areas[index],
-              imageUrl: _areaImageUrl(index),
+              smallImageUrl: _smallAreaImageUrl(index),
+              cardImageUrl: selectedCategory.cardAreaImageUrl(index),
             ),
           ),
         ],

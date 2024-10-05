@@ -15,6 +15,20 @@ enum ParkingCategory {
     const png = Assets.png;
     return [png.colleges.path, png.halls.path, png.recreational.path][index];
   }
+
+  String cardAreaImageUrl(int index) {
+    const png = Assets.png;
+    return switch (this) {
+      ParkingCategory.colleges => [png.chtm.path, png.cict.path, png.law.path, png.cssp.path][index],
+      ParkingCategory.halls => png.hall.path,
+      ParkingCategory.recreational => [
+          png.activityCenter.path,
+          png.heroesPark.path,
+          png.library.path,
+          png.universityHostel.path
+        ][index],
+    };
+  }
 }
 
 enum AreaView {

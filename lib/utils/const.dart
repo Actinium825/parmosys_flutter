@@ -63,3 +63,7 @@ const areaListButtonRadius = 24.0;
 const areaListPadding = EdgeInsets.symmetric(horizontal: 16.0);
 const areaListButtonPadding = EdgeInsets.symmetric(vertical: 4.0, horizontal: 12.0);
 const areaListImageScale = 4.0;
+const areaCardRadius = 12.0;
+
+// Parking Space Page
+const parkingSpaceImageScale = 4.0;
