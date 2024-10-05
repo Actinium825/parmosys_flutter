@@ -5,6 +5,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/selected_theme_provider.dart';
+import 'package:parmosys_flutter/providers/selected_view_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
@@ -76,13 +77,12 @@ class ParmosysDrawer extends ConsumerWidget {
                 ),
                 verticalSpace,
                 ParmosysDrawerButton(
-                  // TODO: Add function
-                  onTap: () {},
+                  onTap: ref.read(selectedViewProvider.notifier).changeViewMode,
                   label: viewLabel,
                   icon: Icons.visibility,
                   iconColor: isDarkMode ? Colors.black : Colors.white,
                   suffix: Text(
-                    gridViewValue,
+                    ref.watch(selectedViewProvider).isGridView ? gridViewValue : listViewValue,
                     style: medium.copyWith(color: viewModeTextColor),
                   ),
                 ),

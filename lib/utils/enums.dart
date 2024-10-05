@@ -16,3 +16,10 @@ enum ParkingCategory {
     return [png.colleges.path, png.halls.path, png.recreational.path][index];
   }
 }
+
+enum AreaView {
+  gridView,
+  listView;
+
+  bool get isGridView => this == gridView;
+}
