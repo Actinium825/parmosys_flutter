@@ -27,49 +27,52 @@ class CategoryButton extends StatelessWidget {
     final isDarkMode = context.isDarkMode;
     final imageUrl = parkingCategory.imageUrl;
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: categoryButtonHeight,
-          width: categoryButtonWidth,
-          child: InkWell(
-            onTap: () => onTap(parkingCategory),
-            borderRadius: borderRadius,
-            splashColor: lightBackgroundColor,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  height: categoryButtonBackgroundHeight,
-                  width: categoryButtonBackgroundWidth,
-                  decoration: BoxDecoration(
-                    color: isDarkMode ? cardButtonDarkColor : cardButtonLightColor,
-                    borderRadius: borderRadius,
-                  ),
-                ),
-                Positioned(
-                  top: imageTopPosition,
-                  left: imageLeftPosition,
-                  child: Hero(
-                    tag: imageUrl,
-                    child: Image.asset(
-                      imageUrl,
-                      width: imageSize,
-                      height: imageSize,
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: categoryButtonHeight,
+            width: categoryButtonWidth,
+            child: InkWell(
+              onTap: () => onTap(parkingCategory),
+              borderRadius: borderRadius,
+              splashColor: lightBackgroundColor,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Container(
+                    height: categoryButtonBackgroundHeight,
+                    width: categoryButtonBackgroundWidth,
+                    decoration: BoxDecoration(
+                      color: isDarkMode ? cardButtonDarkColor : cardButtonLightColor,
+                      borderRadius: borderRadius,
                     ),
                   ),
-                ),
-              ],
+                  Positioned(
+                    top: imageTopPosition,
+                    left: imageLeftPosition,
+                    child: Hero(
+                      tag: imageUrl,
+                      child: Image.asset(
+                        imageUrl,
+                        width: imageSize,
+                        height: imageSize,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        const VerticalSpace(space: 8.0),
-        Text(
-          parkingCategory.header,
-          style: TextStyles.bold.copyWith(color: isDarkMode ? Colors.white : cardButtonLightColor),
-        )
-      ],
+          const VerticalSpace(space: 8.0),
+          Text(
+            parkingCategory.header,
+            style: TextStyles.bold.copyWith(color: isDarkMode ? Colors.white : cardButtonLightColor),
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
     );
   }
 }

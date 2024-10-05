@@ -9,8 +9,8 @@ const cardButtonLightColor = Color(0xff575656);
 const cardButtonDarkColor = Color(0xff353535);
 const additionalHeaderPadding = EdgeInsets.symmetric(horizontal: 24.0);
 
-// Home
-const homePadding = EdgeInsets.symmetric(horizontal: 16.0);
+// Start Page
+const startPagePadding = EdgeInsets.symmetric(horizontal: 16.0);
 const startButtonPadding = EdgeInsets.symmetric(horizontal: 32.0, vertical: 12.0);
 const startButtonColor = Color(0xff6bbd58);
 const startButtonElevation = 6.0;
@@ -22,7 +22,7 @@ const searchTextHeight = 32.0;
 const locationButtonColor = Color(0xffe05353);
 const locationIconSize = 52.0;
 const searchTextRadius = 32.0;
-const lancerSideImageScale = 3.75;
+const lancerSideImageMultiplier = 0.85;
 const collegesImageSize = 92.0;
 const hallsImageSize = 72.0;
 const recreationalImageSize = 100.0;
@@ -32,7 +32,6 @@ const categoryButtonBackgroundHeight = 80.0;
 const categoryButtonBackgroundWidth = 88.0;
 const categoryButtonRadius = 24.0;
 const categoryPageCardRadius = 64.0;
-const lancerSideImagePadding = EdgeInsets.only(top: 80.0);
 
 // Parmosys Drawer
 const logoColor = Color(0xff668b4f);

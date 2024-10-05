@@ -57,15 +57,18 @@ class _AreaPageState extends ConsumerState<AreaPage> {
     final areaCount = areas.length;
     final imageUrl = selectedCategory.imageUrl;
     final color = context.isDarkMode ? Colors.white : Colors.black;
+    const verticalSpaceLarge = VerticalSpace(space: 64.0);
+    const verticalSpaceSmall = VerticalSpace(space: 16.0);
 
     return ParmosysScaffold(
       header: areaPageHeaders,
       body: const VerticalSpace(space: 40.0),
       isBackButtonShown: true,
       cardRadius: areaPageCardRadius,
-      cardBody: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      cardBody: ListView(
+        padding: EdgeInsets.zero,
         children: [
+          const VerticalSpace(space: 32.0),
           Padding(
             padding: EdgeInsets.only(
               left: selectedCategory != ParkingCategory.halls ? 0 : areaPagePadding,
@@ -105,6 +108,7 @@ class _AreaPageState extends ConsumerState<AreaPage> {
               ],
             ),
           ),
+          verticalSpaceSmall,
           FlutterCarousel.builder(
             itemCount: areaCount,
             itemBuilder: (_, index, __) => AreaCard(
@@ -121,26 +125,32 @@ class _AreaPageState extends ConsumerState<AreaPage> {
               onPageChanged: (index, _) => _currentIndexNotifier.value = index,
             ),
           ),
-          SizedBox(
-            width: carouselIndicatorWidth,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                areaCount,
-                (index) => ValueListenableBuilder<int>(
-                  valueListenable: _currentIndexNotifier,
-                  builder: (_, currentIndex, __) => CircleAvatar(
-                    radius: carouselIndicatorRadius,
-                    backgroundColor: currentIndex == index ? activeIndicatorColor : inactiveIndicatorColor,
+          verticalSpaceLarge,
+          Center(
+            child: SizedBox(
+              width: carouselIndicatorWidth,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: List.generate(
+                  areaCount,
+                  (index) => ValueListenableBuilder<int>(
+                    valueListenable: _currentIndexNotifier,
+                    builder: (_, currentIndex, __) => CircleAvatar(
+                      radius: carouselIndicatorRadius,
+                      backgroundColor: currentIndex == index ? activeIndicatorColor : inactiveIndicatorColor,
+                    ),
                   ),
                 ),
               ),
             ),
           ),
+          verticalSpaceLarge,
           Text(
             swipeToSelectLabel,
+            textAlign: TextAlign.center,
             style: TextStyles.medium.copyWith(color: color),
           ),
+          verticalSpaceSmall,
         ],
       ),
     );
