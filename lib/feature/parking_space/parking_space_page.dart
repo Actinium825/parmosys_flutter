@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/parking_space/spot_list.dart';
 import 'package:parmosys_flutter/feature/parking_space/yellow_divider.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
+import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -21,76 +22,84 @@ class ParkingSpacePage extends ConsumerWidget {
     final selectedArea = ref.watch(selectedAreaProvider);
     final imageUrl = selectedArea.imageUrl;
     final backgroundColor = context.isDarkMode ? darkBackgroundColor : lightBackgroundColor;
+    final decoration = BoxDecoration(
+      image: DecorationImage(
+        repeat: ImageRepeat.repeat,
+        image: AssetImage(Assets.png.grain.path),
+      ),
+    );
 
     return Scaffold(
-      backgroundColor: bottomSheetDarkColor,
       appBar: AppBar(
         backgroundColor: backgroundColor,
         actionsIconTheme: appBarIconTheme,
         iconTheme: appBarIconTheme,
       ),
       endDrawer: const ParmosysDrawer(),
-      body: ListView(
-        physics: const ClampingScrollPhysics(),
-        children: [
-          ColoredBox(
-            color: backgroundColor,
-            child: Column(
-              children: [
-                Padding(
-                  padding: parmosysScaffoldPadding,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: Text(
-                              selectedArea.header.toUpperCase(),
-                              style: extraBold,
-                            ),
-                          ),
-                          Flexible(
-                            flex: 3,
-                            child: Hero(
-                              tag: imageUrl,
-                              child: Image.asset(
-                                imageUrl,
-                                scale: parkingSpaceImageScale,
+      body: DecoratedBox(
+        decoration: decoration,
+        child: ListView(
+          physics: const ClampingScrollPhysics(),
+          children: [
+            ColoredBox(
+              color: backgroundColor,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: parmosysScaffoldPadding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Text(
+                                selectedArea.header.toUpperCase(),
+                                style: extraBold,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        parkingSpaceSubLabel,
-                        style: extraBold,
-                      ),
-                      Text(
-                        availableSpotLabel,
-                        style: TextStyles.regular.copyWith(fontSize: 16.0),
-                      ),
-                    ],
+                            Flexible(
+                              flex: 3,
+                              child: Hero(
+                                tag: imageUrl,
+                                child: Image.asset(
+                                  imageUrl,
+                                  scale: parkingSpaceImageScale,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          parkingSpaceSubLabel,
+                          style: extraBold,
+                        ),
+                        Text(
+                          availableSpotLabel,
+                          style: TextStyles.regular.copyWith(fontSize: 16.0),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const VerticalSpace(space: 16.0),
-              ],
+                  const VerticalSpace(space: 16.0),
+                ],
+              ),
             ),
-          ),
-          Container(
-            height: parkingSpaceBorderHeight,
-            foregroundDecoration: parkingSpaceBorderForegroundDecoration,
-            decoration: BoxDecoration(color: backgroundColor),
-          ),
-          const ColoredBox(
-            // TODO: Update texture
-            color: bottomSheetDarkColor,
-            child: Padding(
+            Container(
+              height: parkingSpaceBorderHeight,
+              foregroundDecoration: decoration.copyWith(
+                color: bottomSheetDarkColor,
+                borderRadius: parkingSpaceBorderRadius,
+              ),
+              decoration: BoxDecoration(color: backgroundColor),
+            ),
+            Container(
+              decoration: decoration,
               padding: parkingSpaceCardPadding,
-              child: Row(
+              child: const Row(
                 children: [
                   SpotList(),
                   YellowDivider(multiplier: 6),
@@ -98,8 +107,8 @@ class ParkingSpacePage extends ConsumerWidget {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
