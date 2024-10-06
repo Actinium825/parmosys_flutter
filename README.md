@@ -25,26 +25,26 @@ UI Designer: Jerone Lim
 ![](/reference/screenshot/start_page.png?raw=true)
 
 ### Category Page
-|                                                       Light | Dark                                                       |
-|------------------------------------------------------------:|------------------------------------------------------------|
-| ![](/reference/screenshot/category_page_light.png?raw=true) | ![](/reference/screenshot/category_page_dark.png?raw=true) |
-
-### Menu
 |                                              Light | Dark                                              |
 |---------------------------------------------------:|---------------------------------------------------|
-| ![](/reference/screenshot/menu_light.png?raw=true) | ![](/reference/screenshot/menu_dark.png?raw=true) |
+| ![](/reference/screenshot/category_page_light.png) | ![](/reference/screenshot/category_page_dark.png) |
+
+### Menu
+|                                     Light | Dark                                     |
+|------------------------------------------:|------------------------------------------|
+| ![](/reference/screenshot/menu_light.png) | ![](/reference/screenshot/menu_dark.png) |
 
 ### Area Page (Card View)
-|                                                             Light | Dark                                                             |
-|------------------------------------------------------------------:|------------------------------------------------------------------|
-| ![](/reference/screenshot/area_page_card_view_light.png?raw=true) | ![](/reference/screenshot/area_page_card_view_dark.png?raw=true) |
+|                                                    Light | Dark                                                    |
+|---------------------------------------------------------:|---------------------------------------------------------|
+| ![](/reference/screenshot/area_page_card_view_light.png) | ![](/reference/screenshot/area_page_card_view_dark.png) |
 
 ### Area Page (List View)
-|                                                             Light | Dark                                                             |
-|------------------------------------------------------------------:|------------------------------------------------------------------|
-| ![](/reference/screenshot/area_page_list_view_light.png?raw=true) | ![](/reference/screenshot/area_page_list_view_dark.png?raw=true) |
+|                                                    Light | Dark                                                    |
+|---------------------------------------------------------:|---------------------------------------------------------|
+| ![](/reference/screenshot/area_page_list_view_light.png) | ![](/reference/screenshot/area_page_list_view_dark.png) |
 
 ### Parking Space Page
-|                                                            Light | Dark                                                            |
-|-----------------------------------------------------------------:|-----------------------------------------------------------------|
-| ![](/reference/screenshot/parking_space_page_light.png?raw=true) | ![](/reference/screenshot/parking_space_page_dark.png?raw=true) |
+|                                                   Light | Dark                                                   |
+|--------------------------------------------------------:|--------------------------------------------------------|
+| ![](/reference/screenshot/parking_space_page_light.png) | ![](/reference/screenshot/parking_space_page_dark.png) |
