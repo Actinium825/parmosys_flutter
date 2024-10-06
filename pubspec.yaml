@@ -10,8 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
-  device_preview: ^1.2.0
-  device_preview_screenshot: ^1.0.0
   flutter_carousel_widget: ^3.0.1
   flutter_riverpod: ^2.5.1
   go_router: ^14.2.8
@@ -24,6 +22,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^2.4.12
   custom_lint: ^0.6.7
+  device_preview_screenshot: ^1.0.0
   flutter_gen_runner: ^5.7.0
   flutter_lints: ^5.0.0
   riverpod_generator: ^2.4.3
