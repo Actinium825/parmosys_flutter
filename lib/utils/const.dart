@@ -67,3 +67,17 @@ const areaCardRadius = 12.0;
 
 // Parking Space Page
 const parkingSpaceImageScale = 4.0;
+const parkingYellow = Color(0xffe2de7e);
+const parkingSpaceBorderForegroundDecoration = BoxDecoration(
+  color: bottomSheetDarkColor,
+  borderRadius: BorderRadius.vertical(top: Radius.circular(40.0)),
+);
+const parkingSpaceBorderHeight = 40.0;
+const parkingSpaceCardPadding = EdgeInsets.only(left: 16.0, right: 16.0, bottom: 20.0);
+const spotListPadding = EdgeInsets.only(top: 12.0);
+const spotListWidth = 100.0;
+const yellowDividerThickness = 4.0;
+const spotListPosition = 10.0;
+const spotHeight = 40.0;
+const spotListBaseAngle = 9;
+const yellowDividerHeightMultiplier = 75.0;
