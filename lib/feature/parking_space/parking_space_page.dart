@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:parmosys_flutter/feature/parking_space/spot_list.dart';
+import 'package:parmosys_flutter/feature/parking_space/yellow_divider.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
+import 'package:parmosys_flutter/widgets/spacings.dart';
 
 class ParkingSpacePage extends ConsumerWidget {
   const ParkingSpacePage({super.key});
@@ -17,56 +20,84 @@ class ParkingSpacePage extends ConsumerWidget {
     final extraBold = TextStyles.extraBold;
     final selectedArea = ref.watch(selectedAreaProvider);
     final imageUrl = selectedArea.imageUrl;
+    final backgroundColor = context.isDarkMode ? darkBackgroundColor : lightBackgroundColor;
 
     return Scaffold(
-      backgroundColor: context.isDarkMode ? darkBackgroundColor : lightBackgroundColor,
+      backgroundColor: bottomSheetDarkColor,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: backgroundColor,
         actionsIconTheme: appBarIconTheme,
         iconTheme: appBarIconTheme,
       ),
       endDrawer: const ParmosysDrawer(),
-      body: Column(
+      body: ListView(
+        physics: const ClampingScrollPhysics(),
         children: [
-          Padding(
-            padding: parmosysScaffoldPadding,
+          ColoredBox(
+            color: backgroundColor,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Text(
-                        selectedArea.header.toUpperCase(),
+                Padding(
+                  padding: parmosysScaffoldPadding,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: Text(
+                              selectedArea.header.toUpperCase(),
+                              style: extraBold,
+                            ),
+                          ),
+                          Flexible(
+                            flex: 3,
+                            child: Hero(
+                              tag: imageUrl,
+                              child: Image.asset(
+                                imageUrl,
+                                scale: parkingSpaceImageScale,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        parkingSpaceSubLabel,
                         style: extraBold,
                       ),
-                    ),
-                    Flexible(
-                      flex: 3,
-                      child: Hero(
-                        tag: imageUrl,
-                        child: Image.asset(
-                          imageUrl,
-                          scale: parkingSpaceImageScale,
-                        ),
+                      Text(
+                        availableSpotLabel,
+                        style: TextStyles.regular.copyWith(fontSize: 16.0),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                Text(
-                  parkingSpaceSubLabel,
-                  style: extraBold,
-                ),
-                Text(
-                  availableSpotLabel,
-                  style: TextStyles.regular.copyWith(fontSize: 16.0),
-                ),
+                const VerticalSpace(space: 16.0),
               ],
             ),
-          )
+          ),
+          Container(
+            height: parkingSpaceBorderHeight,
+            foregroundDecoration: parkingSpaceBorderForegroundDecoration,
+            decoration: BoxDecoration(color: backgroundColor),
+          ),
+          const ColoredBox(
+            color: bottomSheetDarkColor,
+            child: Padding(
+              padding: parkingSpaceCardPadding,
+              child: Row(
+                children: [
+                  SpotList(),
+                  YellowDivider(multiplier: 6),
+                  SpotList(alignment: Alignment.topRight),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
