@@ -1,6 +1,7 @@
 const initialRoute = '/';
 const themeModeKey = 'themeMode';
 const viewModeKey = 'viewMode';
+const downloadDirectory = '/storage/emulated/0/Download';
 
 // Home
 const startButtonLabel = 'START';
