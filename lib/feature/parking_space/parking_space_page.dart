@@ -86,6 +86,7 @@ class ParkingSpacePage extends ConsumerWidget {
             decoration: BoxDecoration(color: backgroundColor),
           ),
           const ColoredBox(
+            // TODO: Update texture
             color: bottomSheetDarkColor,
             child: Padding(
               padding: parkingSpaceCardPadding,
