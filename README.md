@@ -15,6 +15,7 @@
 
 ## TODO
 - [ ] Realtime Database
+- [ ] Update Parking Space Screenshot
 
 ## Credits
 UI Designer: Jerone Lim
