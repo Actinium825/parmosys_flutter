@@ -25,26 +25,26 @@ UI Designer: Jerone Lim
 ![](/reference/screenshot/start_page.png?raw=true)
 
 ### Category Page
-|                                              Light | Dark                                              |
-|---------------------------------------------------:|---------------------------------------------------|
-| ![](/reference/screenshot/category_page_light.png) | ![](/reference/screenshot/category_page_dark.png) |
+|                                                                                    Light | Dark                                                                                    |
+|-----------------------------------------------------------------------------------------:|-----------------------------------------------------------------------------------------|
+| <img src="/reference/screenshot/category_page_light.png" style="width:50%; height:auto"> | <img src="/reference/screenshot/category_page_dark.png" style="width:50%; height:auto"> |
 
 ### Menu
-|                                     Light | Dark                                     |
-|------------------------------------------:|------------------------------------------|
-| ![](/reference/screenshot/menu_light.png) | ![](/reference/screenshot/menu_dark.png) |
+|                                                                           Light | Dark                                                                           |
+|--------------------------------------------------------------------------------:|--------------------------------------------------------------------------------|
+| <img src="/reference/screenshot/menu_light.png" style="width:50%; height:auto"> | <img src="/reference/screenshot/menu_dark.png" style="width:50%; height:auto"> |
 
 ### Area Page (Card View)
-|                                                    Light | Dark                                                    |
-|---------------------------------------------------------:|---------------------------------------------------------|
-| ![](/reference/screenshot/area_page_card_view_light.png) | ![](/reference/screenshot/area_page_card_view_dark.png) |
+|                                                                                          Light | Dark                                                                                          |
+|-----------------------------------------------------------------------------------------------:|-----------------------------------------------------------------------------------------------|
+| <img src="/reference/screenshot/area_page_card_view_light.png" style="width:50%; height:auto"> | <img src="/reference/screenshot/area_page_card_view_dark.png" style="width:50%; height:auto"> |
 
 ### Area Page (List View)
-|                                                    Light | Dark                                                    |
-|---------------------------------------------------------:|---------------------------------------------------------|
-| ![](/reference/screenshot/area_page_list_view_light.png) | ![](/reference/screenshot/area_page_list_view_dark.png) |
+|                                                                                          Light | Dark                                                                                           |
+|-----------------------------------------------------------------------------------------------:|------------------------------------------------------------------------------------------------|
+| <img src="/reference/screenshot/area_page_list_view_light.png" style="width:50%; height:auto"> | <img src="/reference/screenshot/area_page_list_view_light.png" style="width:50%; height:auto"> |
 
 ### Parking Space Page
-|                                                   Light | Dark                                                   |
-|--------------------------------------------------------:|--------------------------------------------------------|
-| ![](/reference/screenshot/parking_space_page_light.png) | ![](/reference/screenshot/parking_space_page_dark.png) |
+|                                                                                         Light | Dark                                                                                          |
+|----------------------------------------------------------------------------------------------:|-----------------------------------------------------------------------------------------------|
+| <img src="/reference/screenshot/parking_spage_page_light.png" style="width:50%; height:auto"> | <img src="/reference/screenshot/area_page_card_view_dark.png" style="width:50%; height:auto"> |
