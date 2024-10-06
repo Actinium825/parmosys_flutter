@@ -22,7 +22,7 @@ UI Designer: Jerone Lim
 ## Screenshots
 
 ### Start Page
-![](/reference/screenshot/start_page.png)
+<img src="/reference/screenshot/start_page.png" style="width:50%; height:auto" alt="Start Page">
 
 ### Category Page
 | Light                                              | Dark                                              |
