@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:parmosys_flutter/utils/strings.dart';
 
 part 'parking_space.freezed.dart';
 part 'parking_space.g.dart';
@@ -11,7 +12,7 @@ class ParkingSpace with _$ParkingSpace {
     @Default(1) int number,
   }) = _ParkingSpace;
 
-  factory ParkingSpace.fromJson(Map<String, dynamic> json) => _$ParkingSpotFromJson(json);
+  factory ParkingSpace.fromJson(Map<String, dynamic> json) => _$ParkingSpaceFromJson(json);
 
   factory ParkingSpace.getNumber(Map<String, dynamic> data) {
     final parkingSpace = ParkingSpace.fromJson(data);

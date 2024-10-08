@@ -6,6 +6,7 @@ import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
+import 'package:sprintf/sprintf.dart';
 
 class SpotList extends StatelessWidget {
   const SpotList({
@@ -50,8 +51,7 @@ class SpotList extends StatelessWidget {
                       children: [
                         if (parkingSpace.isAvailable)
                           Text(
-                            // TODO: Replace with sprintf
-                            '$spotLabel ${parkingSpace.number}',
+                            sprintf(spotLabel, [parkingSpace.number]),
                             style: TextStyles.bold.copyWith(fontSize: 24.0),
                           )
                         else

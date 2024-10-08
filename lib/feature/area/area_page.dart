@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/area/area_carousel.dart';
 import 'package:parmosys_flutter/feature/area/area_list.dart';
+import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_category_provider.dart';
 import 'package:parmosys_flutter/providers/selected_view_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
@@ -11,6 +12,7 @@ import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/parmosys_scaffold.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
+import 'package:sprintf/sprintf.dart';
 
 class AreaPage extends ConsumerWidget {
   const AreaPage({super.key});
@@ -19,6 +21,7 @@ class AreaPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(parkingSpacesProvider);
     final selectedCategory = ref.watch(selectedCategoryProvider.notifier).state ?? ParkingCategory.colleges;
     final imageUrl = selectedCategory.imageUrl;
     final color = context.isDarkMode ? Colors.white : Colors.black;
@@ -62,8 +65,7 @@ class AreaPage extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        // TODO: Update value
-                        totalAvailableSpotLabel,
+                        sprintf(totalAvailableSpotLabel, [ref.watch(parkingSpacesProvider.notifier).availableCount()]),
                         style: TextStyles.regular.copyWith(color: color),
                       ),
                     ],
