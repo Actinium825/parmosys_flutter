@@ -11,7 +11,7 @@
       static const endpoint = '{your appwrite endpoint}';
       static const projectId = '{your appwrite project id}';
       static const databaseId = '{database id where collection is found}';
-      static const collectedId = '{collection id under database to write documents into}';
+      static const collectionId = '{collection id under database to write documents into}';
     }
    ```
 
@@ -27,9 +27,7 @@
 - Shared Preferences
 - Package Info Plus
 - AppWrite
-
-## TODO
-- [ ] Update Parking Space Screenshot
+- Freezed
 
 ## Credits
 UI Designer: Jerone Lim

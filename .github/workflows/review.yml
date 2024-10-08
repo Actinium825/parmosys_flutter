@@ -37,7 +37,7 @@ jobs:
             static const endpoint = '';
             static const projectId = '';
             static const databaseId = '';
-            static const collectedId = '';
+            static const collectionId = '';
           }
           EOF
 
