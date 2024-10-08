@@ -1,27 +1,31 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:parmosys_flutter/gen/assets.gen.dart';
+import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 
 class SpotList extends StatelessWidget {
   const SpotList({
-    required this.spaceCount,
+    required this.parkingSpaces,
     required this.divider,
     this.alignment = Alignment.topLeft,
     this.initialSpotCount,
     super.key,
   });
 
+  final List<ParkingSpace> parkingSpaces;
   final Alignment alignment;
   final Widget divider;
-  final int spaceCount;
   final int? initialSpotCount;
 
   @override
   Widget build(BuildContext context) {
     final isLeft = alignment == Alignment.topLeft;
+    final parkingSpacesCount = parkingSpaces.length;
+
     return Expanded(
       child: Stack(
         alignment: alignment,
@@ -34,25 +38,32 @@ class SpotList extends StatelessWidget {
               width: spotListWidth,
               child: ListView.builder(
                 padding: spotListPadding,
-                itemCount: spaceCount,
+                itemCount: parkingSpacesCount,
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (_, index) {
-                  final increment = index + 1;
-                  final spotNumber = increment + (initialSpotCount ?? 0);
-
+                  final parkingSpace = parkingSpaces[index];
                   return Transform.rotate(
                     angle: (isLeft ? pi : -pi) / spotListBaseAngle,
                     child: Column(
                       crossAxisAlignment: isLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          // TODO: Replace with sprintf
-                          '$spotLabel $spotNumber',
-                          style: TextStyles.bold.copyWith(fontSize: 24.0),
-                        ),
+                        if (parkingSpace.isAvailable)
+                          Text(
+                            // TODO: Replace with sprintf
+                            '$spotLabel ${parkingSpace.number}',
+                            style: TextStyles.bold.copyWith(fontSize: 24.0),
+                          )
+                        else
+                          Transform.rotate(
+                            angle: isLeft ? 0 : pi,
+                            child: Image.asset(
+                              Assets.png.car.path,
+                              scale: spotCarImageScale,
+                            ),
+                          ),
                         SizedBox(
-                          width: increment < spaceCount ? spotListWidth : 0,
+                          width: index + 1 < parkingSpacesCount ? spotListWidth : 0,
                           child: const Divider(
                             color: parkingYellow,
                             thickness: yellowDividerThickness,

@@ -78,3 +78,4 @@ const spotListPosition = 10.0;
 const spotHeight = 40.0;
 const spotListBaseAngle = 9;
 const yellowDividerHeightMultiplier = 75.0;
+const spotCarImageScale = 3.25;

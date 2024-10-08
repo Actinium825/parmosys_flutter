@@ -10,6 +10,8 @@ analyzer:
   exclude:
     - "lib/utils/env.dart"
     - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "lib/models/*.dart"
   errors:
     invalid_annotation_target: ignore
 
