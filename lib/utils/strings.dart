@@ -40,3 +40,5 @@ const recreationalAreas = ['Activity Center', 'Heroes Park', 'Library', 'Univers
 // Parking Space Page
 const parkingSpaceSubLabel = 'PARKING SPACE';
 const spotLabel = 'SPOT';
+const noDataLabel = 'No data';
+const loadingLabel = 'Loading';

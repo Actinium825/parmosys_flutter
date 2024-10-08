@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/parking_space/spot_list.dart';
-import 'package:parmosys_flutter/feature/parking_space/yellow_divider.dart';
+import 'package:parmosys_flutter/feature/parking_space/state_text.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
+import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -18,8 +19,9 @@ class ParkingSpacePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final extraBold = TextStyles.extraBold;
     final selectedArea = ref.watch(selectedAreaProvider);
+    final parkingSpaces = ref.watch(parkingSpacesProvider);
+    final extraBold = TextStyles.extraBold;
     final imageUrl = selectedArea.imageUrl;
     final backgroundColor = context.isDarkMode ? darkBackgroundColor : lightBackgroundColor;
     final decoration = BoxDecoration(
@@ -99,12 +101,37 @@ class ParkingSpacePage extends ConsumerWidget {
             Container(
               decoration: decoration,
               padding: parkingSpaceCardPadding,
-              child: const Row(
-                children: [
-                  SpotList(),
-                  YellowDivider(multiplier: 6),
-                  SpotList(alignment: Alignment.topRight),
-                ],
+              child: parkingSpaces.when(
+                data: (data) {
+                  final total = data.total;
+                  final leftCount = (total / 2).ceil();
+                  final divider = SizedBox(
+                    height: leftCount * yellowDividerHeightMultiplier,
+                    child: const VerticalDivider(
+                      color: parkingYellow,
+                      thickness: yellowDividerThickness,
+                    ),
+                  );
+
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SpotList(
+                        spaceCount: leftCount,
+                        divider: divider,
+                      ),
+                      divider,
+                      SpotList(
+                        alignment: Alignment.topRight,
+                        spaceCount: total - leftCount,
+                        divider: divider,
+                        initialSpotCount: leftCount,
+                      ),
+                    ],
+                  );
+                },
+                error: (_, __) => const StateText(label: noDataLabel),
+                loading: () => const StateText(label: loadingLabel),
               ),
             ),
           ],

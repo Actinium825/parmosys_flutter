@@ -2,9 +2,23 @@
 
 ## Steps to run
 1. Update to latest Flutter version
-2. Run "flutter pub get"
-3. Run "dart format -l 120 --set-exit-if-changed ."
-4. Run "flutter pub run build_runner build --delete-conflicting-outputs"
+2. Place `env.dart` in `lib/utils/env.dart`
+   <details>
+   <summary>env.dart</summary>
+
+   ```
+   class Env {
+      static const endpoint = '{your appwrite endpoint}';
+      static const projectId = '{your appwrite project id}';
+      static const databaseId = '{database id where collection is found}';
+      static const collectedId = '{collection id under database to write documents into}';
+    }
+   ```
+
+   </details>
+3. Run `flutter pub get`
+4. Run `dart format -l 120 --set-exit-if-changed .`
+5. Run `flutter pub run build_runner build --delete-conflicting-outputs`
 
 ## Features
 - Flutter Carousel Widget
@@ -12,9 +26,9 @@
 - GoRouter
 - Shared Preferences
 - Package Info Plus
+- AppWrite
 
 ## TODO
-- [ ] Realtime Database
 - [ ] Update Parking Space Screenshot
 
 ## Credits

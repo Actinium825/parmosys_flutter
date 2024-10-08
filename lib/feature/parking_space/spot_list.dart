@@ -1,21 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:parmosys_flutter/feature/parking_space/yellow_divider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 
 class SpotList extends StatelessWidget {
   const SpotList({
-    // TODO: Update value
-    this.spaceCount = 6,
+    required this.spaceCount,
+    required this.divider,
     this.alignment = Alignment.topLeft,
+    this.initialSpotCount,
     super.key,
   });
 
   final Alignment alignment;
+  final Widget divider;
   final int spaceCount;
+  final int? initialSpotCount;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class SpotList extends StatelessWidget {
       child: Stack(
         alignment: alignment,
         children: [
-          YellowDivider(multiplier: spaceCount),
+          divider,
           Positioned(
             left: isLeft ? spotListPosition : null,
             right: isLeft ? null : spotListPosition,
@@ -36,7 +38,9 @@ class SpotList extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 itemBuilder: (_, index) {
-                  final count = index + 1;
+                  final increment = index + 1;
+                  final spotNumber = increment + (initialSpotCount ?? 0);
+
                   return Transform.rotate(
                     angle: (isLeft ? pi : -pi) / spotListBaseAngle,
                     child: Column(
@@ -44,11 +48,11 @@ class SpotList extends StatelessWidget {
                       children: [
                         Text(
                           // TODO: Replace with sprintf
-                          '$spotLabel $count',
+                          '$spotLabel $spotNumber',
                           style: TextStyles.bold.copyWith(fontSize: 24.0),
                         ),
                         SizedBox(
-                          width: count < spaceCount ? spotListWidth : 0,
+                          width: increment < spaceCount ? spotListWidth : 0,
                           child: const Divider(
                             color: parkingYellow,
                             thickness: yellowDividerThickness,
