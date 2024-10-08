@@ -61,7 +61,7 @@ class AreaCard extends ConsumerWidget {
                 ),
               Center(
                 child: Hero(
-                  tag: imageUrl,
+                  tag: area,
                   child: Image.asset(imageUrl),
                 ),
               ),

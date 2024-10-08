@@ -34,7 +34,7 @@ class _ParkingSpacePageState extends ConsumerState<ParkingSpacePage> {
     final selectedArea = ref.watch(selectedAreaProvider);
     final parkingSpacesValue = ref.watch(parkingSpacesProvider);
     final extraBold = TextStyles.extraBold;
-    final imageUrl = selectedArea.imageUrl;
+    final header = selectedArea.header;
     final backgroundColor = context.isDarkMode ? darkBackgroundColor : lightBackgroundColor;
     final decoration = BoxDecoration(
       image: DecorationImage(
@@ -71,16 +71,16 @@ class _ParkingSpacePageState extends ConsumerState<ParkingSpacePage> {
                             Expanded(
                               flex: 4,
                               child: Text(
-                                selectedArea.header.toUpperCase(),
+                                header.toUpperCase(),
                                 style: extraBold,
                               ),
                             ),
                             Flexible(
                               flex: 3,
                               child: Hero(
-                                tag: imageUrl,
+                                tag: header,
                                 child: Image.asset(
-                                  imageUrl,
+                                  selectedArea.imageUrl,
                                   scale: parkingSpaceImageScale,
                                 ),
                               ),
