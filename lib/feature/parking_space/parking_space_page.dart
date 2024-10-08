@@ -11,6 +11,7 @@ import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
+import 'package:sprintf/sprintf.dart';
 
 class ParkingSpacePage extends ConsumerStatefulWidget {
   const ParkingSpacePage({super.key});
@@ -91,7 +92,7 @@ class _ParkingSpacePageState extends ConsumerState<ParkingSpacePage> {
                           style: extraBold,
                         ),
                         Text(
-                          availableSpotLabel,
+                          sprintf(availableSpotLabel, [ref.watch(parkingSpacesProvider.notifier).availableCount()]),
                           style: TextStyles.regular.copyWith(fontSize: 16.0),
                         ),
                       ],

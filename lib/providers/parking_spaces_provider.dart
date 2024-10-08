@@ -2,6 +2,7 @@ import 'package:appwrite/appwrite.dart';
 import 'package:dartx/dartx.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/utils/env.dart';
+import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'parking_spaces_provider.g.dart';
@@ -44,9 +45,10 @@ class ParkingSpaces extends _$ParkingSpaces {
 
   void _initParkingSpaceSubscription() {
     final realtime = Realtime(_initDatabase.client);
-    // TODO: Replace with sprintf
-    final subscription = realtime.subscribe(['databases.${Env.databaseId}.collections.${Env.collectionId}.documents']);
+    final subscription = realtime.subscribe([parkingSpaceChannel]);
 
     subscription.stream.listen((data) => _updateParkingSpace(ParkingSpace.getNumber(data.payload)));
   }
+
+  int availableCount() => state.value?.count((parkingSpace) => parkingSpace.isAvailable) ?? 0;
 }

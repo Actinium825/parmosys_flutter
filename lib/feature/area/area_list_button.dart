@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/parking_space/parking_space_page.dart';
 import 'package:parmosys_flutter/models/parking_area.dart';
+import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
+import 'package:sprintf/sprintf.dart';
 
 class AreaListButton extends ConsumerWidget {
   const AreaListButton({
@@ -55,9 +57,8 @@ class AreaListButton extends ConsumerWidget {
                     style: TextStyles.semiBold.copyWith(letterSpacing: 4.0),
                   ),
                   const VerticalSpace(space: 4.0),
-                  // TODO: Update value
                   Text(
-                    availableSpotLabel,
+                    sprintf(availableSpotLabel, [ref.watch(parkingSpacesProvider.notifier).availableCount()]),
                     style: TextStyles.light,
                   ),
                 ],

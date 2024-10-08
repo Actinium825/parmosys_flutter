@@ -1,7 +1,10 @@
+import 'package:parmosys_flutter/utils/env.dart';
+
 const initialRoute = '/';
 const themeModeKey = 'themeMode';
 const viewModeKey = 'viewMode';
 const downloadDirectory = '/storage/emulated/0/Download';
+const parkingSpaceChannel = 'databases.${Env.databaseId}.collections.${Env.collectionId}.documents';
 
 // Home
 const startButtonLabel = 'START';
@@ -25,8 +28,8 @@ const listViewValue = 'LIST VIEW >';
 // Area Page
 const areaPageHeaders = ['PLEASE SELECT', 'AN AREA'];
 const swipeToSelectLabel = 'SWIPE TO SELECT';
-const totalAvailableSpotLabel = 'Total $availableSpotLabel';
-const availableSpotLabel = 'Available Spot: 0';
+const totalAvailableSpotLabel = 'Total Available Spot: %s';
+const availableSpotLabel = 'Available Spot: %s';
 const sortByLabel = 'SORT BY';
 
 // Parking Category Enum
@@ -39,7 +42,7 @@ const recreationalAreas = ['Activity Center', 'Heroes Park', 'Library', 'Univers
 
 // Parking Space Page
 const parkingSpaceSubLabel = 'PARKING SPACE';
-const spotLabel = 'SPOT';
+const spotLabel = 'SPOT %s';
 const noDataLabel = 'No data';
 const loadingLabel = 'Loading';
 
