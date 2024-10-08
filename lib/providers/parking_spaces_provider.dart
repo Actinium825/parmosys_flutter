@@ -13,7 +13,7 @@ class ParkingSpaces extends _$ParkingSpaces {
 
   void getDocuments() async {
     try {
-      final results = await _initDatabase.listDocuments(databaseId: Env.databaseId, collectionId: Env.collectedId);
+      final results = await _initDatabase.listDocuments(databaseId: Env.databaseId, collectionId: Env.collectionId);
 
       state = AsyncValue.data(
         results.documents
@@ -45,7 +45,7 @@ class ParkingSpaces extends _$ParkingSpaces {
   void _initParkingSpaceSubscription() {
     final realtime = Realtime(_initDatabase.client);
     // TODO: Replace with sprintf
-    final subscription = realtime.subscribe(['databases.${Env.databaseId}.collections.${Env.collectedId}.documents']);
+    final subscription = realtime.subscribe(['databases.${Env.databaseId}.collections.${Env.collectionId}.documents']);
 
     subscription.stream.listen((data) => _updateParkingSpace(ParkingSpace.getNumber(data.payload)));
   }
