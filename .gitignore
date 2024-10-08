@@ -1,5 +1,6 @@
 # Build files
 *.g.dart
+*.freezed.dart
 **/lib/gen
 
 #env

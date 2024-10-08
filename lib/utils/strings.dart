@@ -42,3 +42,6 @@ const parkingSpaceSubLabel = 'PARKING SPACE';
 const spotLabel = 'SPOT';
 const noDataLabel = 'No data';
 const loadingLabel = 'Loading';
+
+// Regex
+const digits = r'\d+';

@@ -8,3 +8,20 @@ targets:
             - lib
           include:
             - lib/providers/*
+
+      json_serializable:
+        options:
+          explicit_to_json: true
+        generate_for:
+          exclude:
+            - lib
+          include:
+            - lib/models/*
+
+      freezed:
+        enabled: true
+        generate_for:
+          exclude:
+            - lib
+          include:
+            - lib/models/*

@@ -4,23 +4,34 @@ import 'package:parmosys_flutter/feature/parking_space/spot_list.dart';
 import 'package:parmosys_flutter/feature/parking_space/state_text.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
-import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
+import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
-class ParkingSpacePage extends ConsumerWidget {
+class ParkingSpacePage extends ConsumerStatefulWidget {
   const ParkingSpacePage({super.key});
 
   static const route = 'parking-space';
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ParkingSpacePage> createState() => _ParkingSpacePageState();
+}
+
+class _ParkingSpacePageState extends ConsumerState<ParkingSpacePage> {
+  @override
+  void initState() {
+    ref.read(parkingSpacesProvider.notifier).getDocuments();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final selectedArea = ref.watch(selectedAreaProvider);
-    final parkingSpaces = ref.watch(parkingSpacesProvider);
+    final parkingSpacesValue = ref.watch(parkingSpacesProvider);
     final extraBold = TextStyles.extraBold;
     final imageUrl = selectedArea.imageUrl;
     final backgroundColor = context.isDarkMode ? darkBackgroundColor : lightBackgroundColor;
@@ -101,10 +112,10 @@ class ParkingSpacePage extends ConsumerWidget {
             Container(
               decoration: decoration,
               padding: parkingSpaceCardPadding,
-              child: parkingSpaces.when(
-                data: (data) {
-                  final total = data.total;
-                  final leftCount = (total / 2).ceil();
+              child: parkingSpacesValue.when(
+                data: (parkingSpaces) {
+                  final totalCount = parkingSpaces.length;
+                  final leftCount = (totalCount / 2).ceil();
                   final divider = SizedBox(
                     height: leftCount * yellowDividerHeightMultiplier,
                     child: const VerticalDivider(
@@ -117,15 +128,15 @@ class ParkingSpacePage extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SpotList(
-                        spaceCount: leftCount,
+                        parkingSpaces: parkingSpaces.sublist(0, leftCount),
                         divider: divider,
                       ),
                       divider,
                       SpotList(
                         alignment: Alignment.topRight,
-                        spaceCount: total - leftCount,
                         divider: divider,
                         initialSpotCount: leftCount,
+                        parkingSpaces: parkingSpaces.sublist(leftCount),
                       ),
                     ],
                   );
