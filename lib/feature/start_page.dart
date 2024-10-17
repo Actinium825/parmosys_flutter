@@ -52,7 +52,7 @@ class StartPage extends ConsumerWidget {
               child: parkingSpaces.maybeWhen(
                 loading: CircularProgressIndicator.new,
                 orElse: () => ElevatedButton(
-                  onPressed: ref.watch(parkingSpacesProvider.notifier).getAllDocuments,
+                  onPressed: ref.read(parkingSpacesProvider.notifier).getAllDocuments,
                   style: ElevatedButton.styleFrom(
                     elevation: startButtonElevation,
                     backgroundColor: startButtonColor,

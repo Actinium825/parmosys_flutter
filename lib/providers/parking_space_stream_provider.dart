@@ -13,10 +13,8 @@ final parkingSpaceStreamProvider = StreamProvider.autoDispose((ref) {
   final realtime = Realtime(client);
 
   final selectedCategory = ref.read(selectedCategoryProvider);
-  final collections = selectedCategory?.areas.map((area) => area.toSnakeCase());
-
-  final channels = collections?.map((collection) => sprintf(parkingSpaceChannel, [collection]));
-  final subscription = realtime.subscribe([...?channels]);
+  final collections = selectedCategory?.areas.map((area) => sprintf(parkingSpaceChannel, [area.toSnakeCase()]));
+  final subscription = realtime.subscribe([...?collections]);
 
   return subscription.stream;
 });
