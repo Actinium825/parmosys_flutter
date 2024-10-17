@@ -1,10 +1,11 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/parking_space/parking_space_card.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
+import 'package:parmosys_flutter/providers/filtered_parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
-import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
@@ -19,7 +20,7 @@ class ParkingSpacePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedArea = ref.read(selectedAreaProvider);
+    final selectedArea = ref.watch(selectedAreaProvider);
     final extraBold = TextStyles.extraBold;
     final header = selectedArea.header;
     final backgroundColor = context.isDarkMode ? darkBackgroundColor : lightBackgroundColor;
@@ -79,7 +80,14 @@ class ParkingSpacePage extends ConsumerWidget {
                           style: extraBold,
                         ),
                         Text(
-                          sprintf(availableSpotLabel, [ref.watch(parkingSpacesProvider.notifier).availableCount()]),
+                          sprintf(
+                            availableSpotLabel,
+                            [
+                              ref
+                                  .watch(filteredParkingSpacesProvider(header.toSnakeCase()))
+                                  .count((filteredParkingSpace) => filteredParkingSpace.isAvailable),
+                            ],
+                          ),
                           style: TextStyles.regular.copyWith(fontSize: 16.0),
                         ),
                       ],

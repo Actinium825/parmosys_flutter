@@ -1,9 +1,10 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/parking_space/parking_space_page.dart';
 import 'package:parmosys_flutter/models/parking_area.dart';
-import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
+import 'package:parmosys_flutter/providers/filtered_parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -69,7 +70,14 @@ class AreaCard extends ConsumerWidget {
                 alignment: isSelected ? Alignment.bottomRight : Alignment.bottomCenter,
                 child: Text(
                   isSelected
-                      ? sprintf(availableSpotLabel, [ref.watch(parkingSpacesProvider.notifier).availableCount()])
+                      ? sprintf(
+                          availableSpotLabel,
+                          [
+                            ref
+                                .watch(filteredParkingSpacesProvider(area.toSnakeCase()))
+                                .count((filteredParkingSpace) => filteredParkingSpace.isAvailable),
+                          ],
+                        )
                       : area,
                   style: isSelected ? TextStyles.medium.copyWith(fontSize: 12.0) : bold,
                 ),

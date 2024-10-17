@@ -1,5 +1,4 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:dartx/dartx.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/utils/env.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -54,6 +53,4 @@ class ParkingSpaces extends _$ParkingSpaces {
 
     state = AsyncValue.data([...?updatedParkingSpaces]);
   }
-
-  int availableCount() => state.value?.count((parkingSpace) => parkingSpace.isAvailable) ?? 0;
 }
