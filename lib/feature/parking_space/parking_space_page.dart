@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:parmosys_flutter/feature/parking_space/spot_list.dart';
-import 'package:parmosys_flutter/feature/parking_space/state_text.dart';
+import 'package:parmosys_flutter/feature/parking_space/parking_space_card.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
@@ -13,26 +12,14 @@ import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 import 'package:sprintf/sprintf.dart';
 
-class ParkingSpacePage extends ConsumerStatefulWidget {
+class ParkingSpacePage extends ConsumerWidget {
   const ParkingSpacePage({super.key});
 
   static const route = 'parking-space';
 
   @override
-  ConsumerState<ParkingSpacePage> createState() => _ParkingSpacePageState();
-}
-
-class _ParkingSpacePageState extends ConsumerState<ParkingSpacePage> {
-  @override
-  void initState() {
-    ref.read(parkingSpacesProvider.notifier).getDocuments();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final selectedArea = ref.watch(selectedAreaProvider);
-    final parkingSpacesValue = ref.watch(parkingSpacesProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedArea = ref.read(selectedAreaProvider);
     final extraBold = TextStyles.extraBold;
     final header = selectedArea.header;
     final backgroundColor = context.isDarkMode ? darkBackgroundColor : lightBackgroundColor;
@@ -113,38 +100,7 @@ class _ParkingSpacePageState extends ConsumerState<ParkingSpacePage> {
             Container(
               decoration: decoration,
               padding: parkingSpaceCardPadding,
-              child: parkingSpacesValue.when(
-                data: (parkingSpaces) {
-                  final totalCount = parkingSpaces.length;
-                  final leftCount = (totalCount / 2).ceil();
-                  final divider = SizedBox(
-                    height: leftCount * yellowDividerHeightMultiplier,
-                    child: const VerticalDivider(
-                      color: parkingYellow,
-                      thickness: yellowDividerThickness,
-                    ),
-                  );
-
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SpotList(
-                        parkingSpaces: parkingSpaces.sublist(0, leftCount),
-                        divider: divider,
-                      ),
-                      divider,
-                      SpotList(
-                        alignment: Alignment.topRight,
-                        divider: divider,
-                        initialSpotCount: leftCount,
-                        parkingSpaces: parkingSpaces.sublist(leftCount),
-                      ),
-                    ],
-                  );
-                },
-                error: (_, __) => const StateText(label: noDataLabel),
-                loading: () => const StateText(label: loadingLabel),
-              ),
+              child: const ParkingSpaceCard(),
             ),
           ],
         ),
