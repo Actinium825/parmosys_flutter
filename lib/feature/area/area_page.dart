@@ -1,8 +1,10 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/area/area_carousel.dart';
 import 'package:parmosys_flutter/feature/area/area_list.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
+import 'package:parmosys_flutter/providers/filtered_parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_category_provider.dart';
 import 'package:parmosys_flutter/providers/selected_view_provider.dart';
@@ -27,6 +29,13 @@ class AreaPage extends ConsumerWidget {
     final imageUrl = selectedCategory.imageUrl;
     final color = context.isDarkMode ? Colors.white : Colors.black;
     const verticalSpace = VerticalSpace(space: 16.0);
+    int count = 0;
+
+    for (final area in selectedCategory.areas) {
+      count += ref
+          .watch(filteredParkingSpacesProvider(area.toSnakeCase()))
+          .count((filteredParkingSpace) => filteredParkingSpace.isAvailable);
+    }
 
     ref.listen(
         parkingSpaceStreamProvider,
@@ -71,7 +80,7 @@ class AreaPage extends ConsumerWidget {
                         ),
                       ),
                       Text(
-                        sprintf(totalAvailableSpotLabel, [ref.watch(parkingSpacesProvider.notifier).availableCount()]),
+                        sprintf(totalAvailableSpotLabel, [count]),
                         style: TextStyles.regular.copyWith(color: color),
                       ),
                     ],

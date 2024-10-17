@@ -9,7 +9,7 @@ class ParkingSpace with _$ParkingSpace {
   const factory ParkingSpace({
     @Default('') @JsonKey(name: '\$id') String id,
     @Default('') @JsonKey(name: '\$collectionId') String collectionId,
-    @Default(true) @JsonKey(name: 'attribute') bool isAvailable,
+    @Default(true) @JsonKey(name: 'availability') bool isAvailable,
     @Default(1) int number,
   }) = _ParkingSpace;
 
