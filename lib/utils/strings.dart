@@ -4,7 +4,7 @@ const initialRoute = '/';
 const themeModeKey = 'themeMode';
 const viewModeKey = 'viewMode';
 const downloadDirectory = '/storage/emulated/0/Download';
-const parkingSpaceChannel = 'databases.${Env.databaseId}.collections.${Env.collectionId}.documents';
+const parkingSpaceChannel = 'databases.${Env.databaseId}.collections.%s.documents';
 
 // Home
 const startButtonLabel = 'START';
@@ -44,7 +44,6 @@ const recreationalAreas = ['Activity Center', 'Heroes Park', 'Library', 'Univers
 const parkingSpaceSubLabel = 'PARKING SPACE';
 const spotLabel = 'SPOT %s';
 const noDataLabel = 'No data';
-const loadingLabel = 'Loading';
 
 // Regex
 const digits = r'\d+';

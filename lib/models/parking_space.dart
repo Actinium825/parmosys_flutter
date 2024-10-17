@@ -8,7 +8,8 @@ part 'parking_space.g.dart';
 class ParkingSpace with _$ParkingSpace {
   const factory ParkingSpace({
     @Default('') @JsonKey(name: '\$id') String id,
-    @Default(true) @JsonKey(name: 'availability') bool isAvailable,
+    @Default('') @JsonKey(name: '\$collectionId') String collectionId,
+    @Default(true) @JsonKey(name: 'attribute') bool isAvailable,
     @Default(1) int number,
   }) = _ParkingSpace;
 

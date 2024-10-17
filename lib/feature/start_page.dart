@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/category/category_page.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
+import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
 
-class StartPage extends StatelessWidget {
+class StartPage extends ConsumerWidget {
   const StartPage({super.key});
 
-  void _onPressStart(BuildContext context) => context.goNamed(CategoryPage.route);
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final parkingSpaces = ref.watch(parkingSpacesProvider);
+
+    ref.listen(
+      parkingSpacesProvider,
+      (previous, next) {
+        if (previous?.isLoading == true && !next.hasError) context.goNamed(CategoryPage.route);
+      },
+    );
+
     const spacer = Spacer();
     return Scaffold(
       backgroundColor: darkBackgroundColor,
@@ -40,18 +49,21 @@ class StartPage extends StatelessWidget {
             ),
             const Spacer(),
             Center(
-              child: ElevatedButton(
-                onPressed: () => _onPressStart(context),
-                style: ElevatedButton.styleFrom(
-                  elevation: startButtonElevation,
-                  backgroundColor: startButtonColor,
-                  padding: startButtonPadding,
-                  visualDensity: VisualDensity.compact,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(startButtonRadius)),
-                ),
-                child: Text(
-                  startButtonLabel,
-                  style: TextStyles.bold,
+              child: parkingSpaces.maybeWhen(
+                loading: CircularProgressIndicator.new,
+                orElse: () => ElevatedButton(
+                  onPressed: ref.watch(parkingSpacesProvider.notifier).getAllDocuments,
+                  style: ElevatedButton.styleFrom(
+                    elevation: startButtonElevation,
+                    backgroundColor: startButtonColor,
+                    padding: startButtonPadding,
+                    visualDensity: VisualDensity.compact,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(startButtonRadius)),
+                  ),
+                  child: Text(
+                    startButtonLabel,
+                    style: TextStyles.bold,
+                  ),
                 ),
               ),
             ),

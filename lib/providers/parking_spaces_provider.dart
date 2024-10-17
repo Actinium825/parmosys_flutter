@@ -2,52 +2,57 @@ import 'package:appwrite/appwrite.dart';
 import 'package:dartx/dartx.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/utils/env.dart';
+import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'parking_spaces_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class ParkingSpaces extends _$ParkingSpaces {
   @override
-  AsyncValue<List<ParkingSpace>> build() => const AsyncLoading();
+  AsyncValue<List<ParkingSpace>> build() => const AsyncData([]);
 
-  void getDocuments() async {
-    try {
-      final results = await _initDatabase.listDocuments(databaseId: Env.databaseId, collectionId: Env.collectionId);
+  final _documents = <ParkingSpace>[];
 
-      state = AsyncValue.data(
-        results.documents
-            .map((document) => ParkingSpace.getNumber(document.data))
-            .sortedBy((parkingSpace) => parkingSpace.number),
-      );
+  void getAllDocuments() async {
+    state = const AsyncLoading();
 
-      _initParkingSpaceSubscription();
-    } on AppwriteException catch (error, stack) {
-      state = AsyncError(error, stack);
-    }
-  }
-
-  void _updateParkingSpace(ParkingSpace updatedParkingSpace) {
-    final updatedParkingSpaces = state.value
-        ?.map((parkingSpace) => parkingSpace.number == updatedParkingSpace.number ? updatedParkingSpace : parkingSpace);
-
-    state = AsyncValue.data([...?updatedParkingSpaces]);
-  }
-
-  Databases get _initDatabase {
+    final areas = [...collegesAreas, ...hallsAreas, ...recreationalAreas];
     final client = Client()
       ..setEndpoint(Env.endpoint)
       ..setProject(Env.projectId);
+    final database = Databases(client);
+    final futures = <Future<void>>[];
 
-    return Databases(client);
+    for (final area in areas) {
+      futures.add(getDocuments(database, area.toSnakeCase()));
+    }
+
+    try {
+      await Future.wait(futures);
+    } catch (error, stack) {
+      state = AsyncError(error, stack);
+    }
+
+    state = AsyncValue.data(_documents);
   }
 
-  void _initParkingSpaceSubscription() {
-    final realtime = Realtime(_initDatabase.client);
-    final subscription = realtime.subscribe([parkingSpaceChannel]);
+  Future<void> getDocuments(Databases database, String collectionId) async {
+    final results = await database.listDocuments(databaseId: Env.databaseId, collectionId: collectionId);
 
-    subscription.stream.listen((data) => _updateParkingSpace(ParkingSpace.getNumber(data.payload)));
+    for (final document in results.documents) {
+      _documents.add(ParkingSpace.getNumber(document.data));
+    }
+  }
+
+  void updateParkingSpace(ParkingSpace updatedParkingSpace) {
+    final updatedParkingSpaces = state.value?.map((parkingSpace) => parkingSpace.number == updatedParkingSpace.number &&
+            parkingSpace.collectionId == updatedParkingSpace.collectionId
+        ? updatedParkingSpace
+        : parkingSpace);
+
+    state = AsyncValue.data([...?updatedParkingSpaces]);
   }
 
   int availableCount() => state.value?.count((parkingSpace) => parkingSpace.isAvailable) ?? 0;
