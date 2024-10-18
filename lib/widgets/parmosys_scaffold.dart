@@ -1,3 +1,4 @@
+import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/utils/const.dart';
@@ -57,7 +58,7 @@ class ParmosysScaffold extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              header[1],
+                              header.second,
                               style: extraBold,
                             ),
                             const Icon(
