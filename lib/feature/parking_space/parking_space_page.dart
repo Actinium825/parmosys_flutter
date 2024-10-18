@@ -1,10 +1,9 @@
-import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/parking_space/parking_space_card.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
-import 'package:parmosys_flutter/providers/filtered_parking_spaces_provider.dart';
+import 'package:parmosys_flutter/providers/available_spots_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -80,14 +79,7 @@ class ParkingSpacePage extends ConsumerWidget {
                           style: extraBold,
                         ),
                         Text(
-                          sprintf(
-                            availableSpotLabel,
-                            [
-                              ref
-                                  .watch(filteredParkingSpacesProvider(header.toSnakeCase()))
-                                  .count((filteredParkingSpace) => filteredParkingSpace.isAvailable),
-                            ],
-                          ),
+                          sprintf(availableSpotLabel, [ref.watch(availableSpotsProvider(header.toSnakeCase()))]),
                           style: TextStyles.regular.copyWith(fontSize: 16.0),
                         ),
                       ],

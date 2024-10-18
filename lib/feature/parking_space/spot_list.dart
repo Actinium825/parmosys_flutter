@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
-import 'package:parmosys_flutter/models/parking_space.dart';
+import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
@@ -17,7 +17,7 @@ class SpotList extends StatelessWidget {
     super.key,
   });
 
-  final List<ParkingSpace> parkingSpaces;
+  final List<ParkingSpaceDto> parkingSpaces;
   final Alignment alignment;
   final Widget divider;
   final int? initialSpotCount;
