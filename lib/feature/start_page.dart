@@ -12,17 +12,13 @@ import 'package:parmosys_flutter/widgets/spacings.dart';
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
 
+  void _onPressStart(BuildContext context, WidgetRef ref) {
+    ref.read(parkingSpacesProvider().notifier).getAllDocuments();
+    context.pushNamed(CategoryPage.route);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final parkingSpaces = ref.watch(parkingSpacesProvider);
-
-    ref.listen(
-      parkingSpacesProvider,
-      (previous, next) {
-        if (previous?.isLoading == true && !next.hasError) context.goNamed(CategoryPage.route);
-      },
-    );
-
     const spacer = Spacer();
     return Scaffold(
       backgroundColor: darkBackgroundColor,
@@ -49,21 +45,18 @@ class StartPage extends ConsumerWidget {
             ),
             const Spacer(),
             Center(
-              child: parkingSpaces.maybeWhen(
-                loading: CircularProgressIndicator.new,
-                orElse: () => ElevatedButton(
-                  onPressed: ref.read(parkingSpacesProvider.notifier).getAllDocuments,
-                  style: ElevatedButton.styleFrom(
-                    elevation: startButtonElevation,
-                    backgroundColor: startButtonColor,
-                    padding: startButtonPadding,
-                    visualDensity: VisualDensity.compact,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(startButtonRadius)),
-                  ),
-                  child: Text(
-                    startButtonLabel,
-                    style: TextStyles.bold,
-                  ),
+              child: ElevatedButton(
+                onPressed: () => _onPressStart(context, ref),
+                style: ElevatedButton.styleFrom(
+                  elevation: startButtonElevation,
+                  backgroundColor: startButtonColor,
+                  padding: startButtonPadding,
+                  visualDensity: VisualDensity.compact,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(startButtonRadius)),
+                ),
+                child: Text(
+                  startButtonLabel,
+                  style: TextStyles.bold,
                 ),
               ),
             ),

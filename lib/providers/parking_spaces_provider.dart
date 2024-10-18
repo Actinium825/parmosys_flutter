@@ -1,5 +1,8 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:dartx/dartx.dart';
+import 'package:isar/isar.dart';
+import 'package:parmosys_flutter/main.dart';
+import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/utils/env.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -8,16 +11,14 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'parking_spaces_provider.g.dart';
 
-@Riverpod(keepAlive: true)
+@riverpod
 class ParkingSpaces extends _$ParkingSpaces {
   @override
-  AsyncValue<List<ParkingSpace>> build() => const AsyncData([]);
+  Stream<List<ParkingSpaceDto>> build([String? area]) => area != null
+      ? isar.parkingSpaceDtos.filter().areaEqualTo(area).sortByNumber().watch(fireImmediately: true)
+      : isar.parkingSpaceDtos.where().watch(fireImmediately: true);
 
-  final _documents = <ParkingSpace>[];
-
-  void getAllDocuments() async {
-    state = const AsyncLoading();
-
+  void getAllDocuments() {
     final areas = [...collegesAreas, ...hallsAreas, ...recreationalAreas];
     final client = Client()
       ..setEndpoint(Env.endpoint)
@@ -29,42 +30,59 @@ class ParkingSpaces extends _$ParkingSpaces {
       futures.add(getDocuments(database, area.toSnakeCase()));
     }
 
-    try {
-      await Future.wait(futures);
-    } catch (error, stack) {
-      state = AsyncError(error, stack);
-    }
-
-    state = AsyncValue.data(_documents);
+    Future.wait(futures);
   }
 
   Future<void> getDocuments(Databases database, String collectionId) async {
     final results = await database.listDocuments(databaseId: Env.databaseId, collectionId: collectionId);
+    final parkingSpaceDtos = isar.parkingSpaceDtos;
 
     for (final document in results.documents) {
-      _documents.add(ParkingSpace.getNumber(document.data));
+      final parkingSpace = ParkingSpace.fromJson(document.data).toDto();
+      final existingLocalID = parkingSpaceDtos
+          .filter()
+          .areaEqualTo(parkingSpace.area)
+          .and()
+          .numberEqualTo(parkingSpace.number)
+          .localIDProperty()
+          .findFirstSync();
+
+      isar.writeTxnSync(() => parkingSpaceDtos.putSync(parkingSpace..localID = existingLocalID));
     }
   }
 
   void updateParkingSpace(RealtimeMessage value) {
-    final updatedParkingSpace = ParkingSpace.getNumber(value.payload);
+    final updatedParkingSpace = ParkingSpace.fromJson(value.payload).toDto();
     final event = value.events.firstOrNull?.split('.').lastOrNull ?? '';
-    final currentParkingSpaces = [...?state.value];
+    final parkingSpaceDtos = isar.parkingSpaceDtos;
 
     switch (event) {
       case update:
-        final updatedParkingSpaces = currentParkingSpaces
-            .map((parkingSpace) => parkingSpace.isMatch(updatedParkingSpace) ? updatedParkingSpace : parkingSpace)
-            .toList();
+        final existingParkingSpace = parkingSpaceDtos
+            .filter()
+            .areaEqualTo(updatedParkingSpace.area)
+            .and()
+            .numberEqualTo(updatedParkingSpace.number)
+            .build()
+            .findFirstSync();
 
-        state = AsyncValue.data(updatedParkingSpaces);
+        if (existingParkingSpace != null) {
+          isar.writeTxnSync(
+              () => parkingSpaceDtos.putSync(updatedParkingSpace..localID = existingParkingSpace.localID));
+        }
       case create:
-        state = AsyncValue.data([...currentParkingSpaces, updatedParkingSpace]);
+        isar.writeTxnSync(() => parkingSpaceDtos.putSync(updatedParkingSpace));
       case delete:
-        final updatedParkingSpaces =
-            currentParkingSpaces.filterNot((parkingSpace) => parkingSpace.isMatch(updatedParkingSpace)).toList();
+        final deletedLocalID = parkingSpaceDtos
+            .filter()
+            .areaEqualTo(updatedParkingSpace.area)
+            .and()
+            .numberEqualTo(updatedParkingSpace.number)
+            .localIDProperty()
+            .build()
+            .findFirstSync();
 
-        state = AsyncValue.data(updatedParkingSpaces);
+        if (deletedLocalID != null) isar.writeTxnSync(() => parkingSpaceDtos.deleteSync(deletedLocalID));
     }
   }
 }

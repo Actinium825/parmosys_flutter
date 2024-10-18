@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
+import 'package:parmosys_flutter/utils/strings.dart';
 
 extension BuildContextExt on BuildContext {
   bool get isDarkMode => Theme.of(this).brightness == Brightness.dark;
@@ -13,6 +15,19 @@ extension StringExt on String {
 }
 
 extension ParkingSpaceExt on ParkingSpace {
-  bool isMatch(ParkingSpace updatedParkingSpace) =>
-      number == updatedParkingSpace.number && collectionId == updatedParkingSpace.collectionId;
+  ParkingSpaceDto toDto() {
+    final match = RegExp(digits).stringMatch(id ?? '') ?? '';
+    final number = int.tryParse(match) ?? 0;
+
+    return ParkingSpaceDto(
+      area: collectionId ?? '',
+      isAvailable: isAvailable ?? false,
+      number: number,
+    );
+  }
+}
+
+extension ParkingSpaceDtoExt on ParkingSpaceDto {
+  bool isMatch(ParkingSpaceDto updatedParkingSpace) =>
+      number == updatedParkingSpace.number && area == updatedParkingSpace.area;
 }

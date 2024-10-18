@@ -11,7 +11,6 @@
       static const endpoint = '{your appwrite endpoint}';
       static const projectId = '{your appwrite project id}';
       static const databaseId = '{database id where collection is found}';
-      static const collectionId = '{collection id under database to write documents into}';
     }
    ```
 

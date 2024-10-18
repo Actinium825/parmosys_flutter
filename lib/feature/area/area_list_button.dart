@@ -1,10 +1,9 @@
-import 'package:dartx/dartx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/parking_space/parking_space_page.dart';
 import 'package:parmosys_flutter/models/parking_area.dart';
-import 'package:parmosys_flutter/providers/filtered_parking_spaces_provider.dart';
+import 'package:parmosys_flutter/providers/available_spots_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -60,14 +59,7 @@ class AreaListButton extends ConsumerWidget {
                   ),
                   const VerticalSpace(space: 4.0),
                   Text(
-                    sprintf(
-                      availableSpotLabel,
-                      [
-                        ref
-                            .watch(filteredParkingSpacesProvider(area.toSnakeCase()))
-                            .count((filteredParkingSpace) => filteredParkingSpace.isAvailable),
-                      ],
-                    ),
+                    sprintf(availableSpotLabel, [ref.watch(availableSpotsProvider(area.toSnakeCase()))]),
                     style: TextStyles.light,
                   ),
                 ],

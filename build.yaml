@@ -25,3 +25,11 @@ targets:
             - lib
           include:
             - lib/models/*
+
+      isar_generator:
+        enabled: true
+        generate_for:
+          exclude:
+            - lib
+          include:
+            - lib/models/dto/*
