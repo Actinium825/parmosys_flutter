@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:parmosys_flutter/providers/shared_preferences_provider.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'selected_theme_provider.g.dart';
 
 @riverpod
 class SelectedTheme extends _$SelectedTheme {
   @override
-  ThemeMode build() => ThemeMode.light;
-
-  void changeThemeMode(bool isDarkMode) async {
-    state = isDarkMode ? ThemeMode.dark : ThemeMode.light;
-
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setInt(themeModeKey, state.index);
-  }
-
-  void loadSavedTheme() async {
-    final prefs = await SharedPreferences.getInstance();
+  ThemeMode build() {
+    final prefs = ref.read(sharedPreferencesProvider);
     final themeModeIndex = prefs.getInt(themeModeKey) ?? ThemeMode.light.index;
 
-    state = ThemeMode.values.elementAt(themeModeIndex);
+    return ThemeMode.values.elementAt(themeModeIndex);
+  }
+
+  void changeThemeMode(bool isDarkMode) {
+    state = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+
+    final prefs = ref.read(sharedPreferencesProvider);
+    prefs.setInt(themeModeKey, state.index);
   }
 }

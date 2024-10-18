@@ -1,11 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:isar/isar.dart';
-import 'package:parmosys_flutter/main.dart';
 import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
+import 'package:parmosys_flutter/providers/isar_provider.dart';
 import 'package:parmosys_flutter/providers/selected_category_provider.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 
 final availableSpotsStreamProvider = StreamProvider.autoDispose.family<List<ParkingSpaceDto>, String?>((ref, area) {
+  final isar = ref.read(isarInstanceProvider);
+
   if (area != null) {
     return isar.parkingSpaceDtos.filter().areaEqualTo(area).and().isAvailableEqualTo(true).watch(fireImmediately: true);
   }

@@ -1,9 +1,10 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:dartx/dartx.dart';
 import 'package:isar/isar.dart';
-import 'package:parmosys_flutter/main.dart';
 import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
+import 'package:parmosys_flutter/providers/appwrite_client_provider.dart';
+import 'package:parmosys_flutter/providers/isar_provider.dart';
 import 'package:parmosys_flutter/utils/env.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
@@ -14,27 +15,32 @@ part 'parking_spaces_provider.g.dart';
 @riverpod
 class ParkingSpaces extends _$ParkingSpaces {
   @override
-  Stream<List<ParkingSpaceDto>> build([String? area]) => area != null
-      ? isar.parkingSpaceDtos.filter().areaEqualTo(area).sortByNumber().watch(fireImmediately: true)
-      : isar.parkingSpaceDtos.where().watch(fireImmediately: true);
+  Stream<List<ParkingSpaceDto>> build([String? area]) {
+    final isar = ref.read(isarInstanceProvider);
+    return area != null
+        ? isar.parkingSpaceDtos.filter().areaEqualTo(area).sortByNumber().watch(fireImmediately: true)
+        : isar.parkingSpaceDtos.where().watch(fireImmediately: true);
+  }
 
   void getAllDocuments() {
-    final areas = [...collegesAreas, ...hallsAreas, ...recreationalAreas];
-    final client = Client()
-      ..setEndpoint(Env.endpoint)
-      ..setProject(Env.projectId);
+    final client = ref.read(appwriteClientProvider);
     final database = Databases(client);
+    final isar = ref.read(isarInstanceProvider);
+    final areas = [...collegesAreas, ...hallsAreas, ...recreationalAreas];
     final futures = <Future<void>>[];
 
     for (final area in areas) {
-      futures.add(getDocuments(database, area.toSnakeCase()));
+      futures.add(getDocuments(database, isar, area.toSnakeCase()));
     }
 
     Future.wait(futures);
   }
 
-  Future<void> getDocuments(Databases database, String collectionId) async {
-    final results = await database.listDocuments(databaseId: Env.databaseId, collectionId: collectionId);
+  Future<void> getDocuments(Databases database, Isar isar, String collectionId) async {
+    final results = await database.listDocuments(
+      databaseId: Env.databaseId,
+      collectionId: collectionId,
+    );
     final parkingSpaceDtos = isar.parkingSpaceDtos;
 
     for (final document in results.documents) {
@@ -54,6 +60,7 @@ class ParkingSpaces extends _$ParkingSpaces {
   void updateParkingSpace(RealtimeMessage value) {
     final updatedParkingSpace = ParkingSpace.fromJson(value.payload).toDto();
     final event = value.events.firstOrNull?.split('.').lastOrNull ?? '';
+    final isar = ref.read(isarInstanceProvider);
     final parkingSpaceDtos = isar.parkingSpaceDtos;
 
     switch (event) {
