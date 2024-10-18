@@ -27,6 +27,7 @@
 - Package Info Plus
 - AppWrite
 - Freezed
+- Isar
 
 ## Credits
 UI Designer: Jerone Lim
