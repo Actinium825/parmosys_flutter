@@ -1,4 +1,5 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:dartx/dartx.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/utils/env.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -45,12 +46,25 @@ class ParkingSpaces extends _$ParkingSpaces {
     }
   }
 
-  void updateParkingSpace(ParkingSpace updatedParkingSpace) {
-    final updatedParkingSpaces = state.value?.map((parkingSpace) => parkingSpace.number == updatedParkingSpace.number &&
-            parkingSpace.collectionId == updatedParkingSpace.collectionId
-        ? updatedParkingSpace
-        : parkingSpace);
+  void updateParkingSpace(RealtimeMessage value) {
+    final updatedParkingSpace = ParkingSpace.getNumber(value.payload);
+    final event = value.events.firstOrNull?.split('.').lastOrNull ?? '';
+    final currentParkingSpaces = [...?state.value];
 
-    state = AsyncValue.data([...?updatedParkingSpaces]);
+    switch (event) {
+      case update:
+        final updatedParkingSpaces = currentParkingSpaces
+            .map((parkingSpace) => parkingSpace.isMatch(updatedParkingSpace) ? updatedParkingSpace : parkingSpace)
+            .toList();
+
+        state = AsyncValue.data(updatedParkingSpaces);
+      case create:
+        state = AsyncValue.data([...currentParkingSpaces, updatedParkingSpace]);
+      case delete:
+        final updatedParkingSpaces =
+            currentParkingSpaces.filterNot((parkingSpace) => parkingSpace.isMatch(updatedParkingSpace)).toList();
+
+        state = AsyncValue.data(updatedParkingSpaces);
+    }
   }
 }
