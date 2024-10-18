@@ -47,3 +47,8 @@ const noDataLabel = 'No data';
 
 // Regex
 const digits = r'\d+';
+
+// Appwrite events
+const delete = 'delete';
+const update = 'update';
+const create = 'create';

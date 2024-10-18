@@ -51,7 +51,7 @@ class ParmosysScaffold extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          header.first,
+                          header.firstOrNull ?? '',
                           style: extraBold,
                         ),
                         Row(
