@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/providers/available_spots_provider.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
-import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:sprintf/sprintf.dart';
 
 class AreaCountLabel extends ConsumerWidget {

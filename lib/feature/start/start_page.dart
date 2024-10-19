@@ -5,7 +5,6 @@ import 'package:parmosys_flutter/feature/category/category_page.dart';
 import 'package:parmosys_flutter/feature/start/start_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/loading_state_provider.dart';
-import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
