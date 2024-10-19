@@ -4,6 +4,7 @@ import 'package:isar/isar.dart';
 import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/providers/appwrite_client_provider.dart';
+import 'package:parmosys_flutter/providers/loading_state_provider.dart';
 import 'package:parmosys_flutter/providers/isar_provider.dart';
 import 'package:parmosys_flutter/utils/env.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
@@ -22,7 +23,11 @@ class ParkingSpaces extends _$ParkingSpaces {
         : isar.parkingSpaceDtos.where().watch(fireImmediately: true);
   }
 
-  void getAllDocuments() {
+  void getAllDocuments() async {
+    final loadingState = ref.read(loadingStateProvider.notifier);
+
+    loadingState.setLoading();
+
     final client = ref.read(appwriteClientProvider);
     final database = Databases(client);
     final isar = ref.read(isarInstanceProvider);
@@ -33,7 +38,13 @@ class ParkingSpaces extends _$ParkingSpaces {
       futures.add(getDocuments(database, isar, area.toSnakeCase()));
     }
 
-    Future.wait(futures);
+    try {
+      await Future.wait(futures);
+    } catch (error, stackTrace) {
+      loadingState.setError(error, stackTrace);
+    }
+
+    loadingState.removeLoading();
   }
 
   Future<void> getDocuments(Databases database, Isar isar, String collectionId) async {

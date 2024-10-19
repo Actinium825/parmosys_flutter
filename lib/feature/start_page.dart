@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/category/category_page.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
+import 'package:parmosys_flutter/providers/loading_state_provider.dart';
 import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
@@ -12,14 +13,23 @@ import 'package:parmosys_flutter/widgets/spacings.dart';
 class StartPage extends ConsumerWidget {
   const StartPage({super.key});
 
-  void _onPressStart(BuildContext context, WidgetRef ref) {
-    ref.read(parkingSpacesProvider().notifier).getAllDocuments();
-    context.pushNamed(CategoryPage.route);
+  void _loadingStateListener(BuildContext context, AsyncValue<dynamic>? previous, AsyncValue<dynamic> next) {
+    final hasError = next.hasError;
+
+    if (hasError) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(next.error.toString())));
+    } else if (previous?.isLoading == true && !hasError) {
+      context.pushNamed(CategoryPage.route);
+    }
   }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final loadingState = ref.watch(loadingStateProvider);
     const spacer = Spacer();
+
+    ref.listen(loadingStateProvider, (previous, next) => _loadingStateListener(context, previous, next));
+
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: Padding(
@@ -45,18 +55,21 @@ class StartPage extends ConsumerWidget {
             ),
             const Spacer(),
             Center(
-              child: ElevatedButton(
-                onPressed: () => _onPressStart(context, ref),
-                style: ElevatedButton.styleFrom(
-                  elevation: startButtonElevation,
-                  backgroundColor: startButtonColor,
-                  padding: startButtonPadding,
-                  visualDensity: VisualDensity.compact,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(startButtonRadius)),
-                ),
-                child: Text(
-                  startButtonLabel,
-                  style: TextStyles.bold,
+              child: loadingState.maybeWhen(
+                loading: CircularProgressIndicator.new,
+                orElse: () => ElevatedButton(
+                  onPressed: ref.read(parkingSpacesProvider().notifier).getAllDocuments,
+                  style: ElevatedButton.styleFrom(
+                    elevation: startButtonElevation,
+                    backgroundColor: startButtonColor,
+                    padding: startButtonPadding,
+                    visualDensity: VisualDensity.compact,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(startButtonRadius)),
+                  ),
+                  child: Text(
+                    startButtonLabel,
+                    style: TextStyles.bold,
+                  ),
                 ),
               ),
             ),
