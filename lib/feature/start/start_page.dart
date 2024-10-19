@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/category/category_page.dart';
+import 'package:parmosys_flutter/feature/start/start_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/loading_state_provider.dart';
 import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
@@ -25,7 +26,6 @@ class StartPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final loadingState = ref.watch(loadingStateProvider);
     const spacer = Spacer();
 
     ref.listen(loadingStateProvider, (previous, next) => _loadingStateListener(context, previous, next));
@@ -53,26 +53,8 @@ class StartPage extends ConsumerWidget {
                 style: TextStyles.light.copyWith(fontSize: 16),
               ),
             ),
-            const Spacer(),
-            Center(
-              child: loadingState.maybeWhen(
-                loading: CircularProgressIndicator.new,
-                orElse: () => ElevatedButton(
-                  onPressed: ref.read(parkingSpacesProvider().notifier).getAllDocuments,
-                  style: ElevatedButton.styleFrom(
-                    elevation: startButtonElevation,
-                    backgroundColor: startButtonColor,
-                    padding: startButtonPadding,
-                    visualDensity: VisualDensity.compact,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(startButtonRadius)),
-                  ),
-                  child: Text(
-                    startButtonLabel,
-                    style: TextStyles.bold,
-                  ),
-                ),
-              ),
-            ),
+            spacer,
+            const StartButton(),
             spacer,
           ],
         ),

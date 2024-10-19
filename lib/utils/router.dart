@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:parmosys_flutter/feature/area/area_page.dart';
 import 'package:parmosys_flutter/feature/category/category_page.dart';
 import 'package:parmosys_flutter/feature/parking_space/parking_space_page.dart';
-import 'package:parmosys_flutter/feature/start_page.dart';
+import 'package:parmosys_flutter/feature/start/start_page.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();

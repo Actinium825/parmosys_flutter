@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:parmosys_flutter/feature/area/area_carousel.dart';
-import 'package:parmosys_flutter/feature/area/area_list.dart';
-import 'package:parmosys_flutter/providers/available_spots_provider.dart';
+import 'package:parmosys_flutter/feature/area/area_body.dart';
+import 'package:parmosys_flutter/feature/area/area_count_label.dart';
 import 'package:parmosys_flutter/providers/parking_spaces_provider.dart';
 import 'package:parmosys_flutter/providers/selected_category_provider.dart';
-import 'package:parmosys_flutter/providers/selected_view_provider.dart';
 import 'package:parmosys_flutter/providers/parking_space_stream_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/enums.dart';
@@ -14,7 +12,6 @@ import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/parmosys_scaffold.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
-import 'package:sprintf/sprintf.dart';
 
 class AreaPage extends ConsumerWidget {
   const AreaPage({super.key});
@@ -25,9 +22,7 @@ class AreaPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCategory = ref.read(selectedCategoryProvider) ?? ParkingCategory.colleges;
     final imageUrl = selectedCategory.imageUrl;
-    final color = context.isDarkMode ? Colors.white : Colors.black;
     const verticalSpace = VerticalSpace(space: 16.0);
-    final count = ref.watch(availableSpotsProvider(null));
 
     ref.listen(parkingSpaceStreamProvider,
         (_, next) => next.whenData((value) => ref.read(parkingSpacesProvider().notifier).updateParkingSpace(value)));
@@ -63,15 +58,15 @@ class AreaPage extends ConsumerWidget {
                       Text(
                         selectedCategory.header.toUpperCase(),
                         style: TextStyles.extraBold.copyWith(
-                          color: color,
+                          color: context.isDarkMode ? Colors.white : Colors.black,
                           overflow: TextOverflow.ellipsis,
                           fontSize: 32.0,
                           letterSpacing: areaPageHeaderSpacing,
                         ),
                       ),
-                      Text(
-                        sprintf(totalAvailableSpotLabel, [count]),
-                        style: TextStyles.regular.copyWith(color: color),
+                      AreaCountLabel(
+                        label: totalAvailableSpotLabel,
+                        style: TextStyles.regular.copyWith(color: context.isDarkMode ? Colors.white : Colors.black),
                       ),
                     ],
                   ),
@@ -80,10 +75,7 @@ class AreaPage extends ConsumerWidget {
             ),
           ),
           verticalSpace,
-          if (ref.watch(selectedViewProvider).isGridView)
-            AreaCarousel(selectedCategory: selectedCategory)
-          else
-            AreaList(selectedCategory: selectedCategory),
+          const AreaBody(),
           verticalSpace,
         ],
       ),
