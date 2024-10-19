@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:parmosys_flutter/feature/area/area_count_label.dart';
 import 'package:parmosys_flutter/feature/parking_space/parking_space_page.dart';
 import 'package:parmosys_flutter/models/parking_area.dart';
-import 'package:parmosys_flutter/providers/available_spots_provider.dart';
 import 'package:parmosys_flutter/providers/selected_area_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
-import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
-import 'package:sprintf/sprintf.dart';
 
 class AreaCard extends ConsumerWidget {
   const AreaCard({
@@ -67,13 +65,16 @@ class AreaCard extends ConsumerWidget {
               ),
               Align(
                 alignment: isSelected ? Alignment.bottomRight : Alignment.bottomCenter,
-                child: Text(
-                  isSelected
-                      ? sprintf(availableSpotLabel, [ref.watch(availableSpotsProvider(area.toSnakeCase()))])
-                      : area,
-                  style: isSelected ? TextStyles.medium.copyWith(fontSize: 12.0) : bold,
-                ),
-              )
+                child: isSelected
+                    ? AreaCountLabel(
+                        area: area,
+                        style: TextStyles.medium.copyWith(fontSize: 12.0),
+                      )
+                    : Text(
+                        area,
+                        style: bold,
+                      ),
+              ),
             ],
           ),
         ),
