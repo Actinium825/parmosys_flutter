@@ -22,6 +22,7 @@ class AreaPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCategory = ref.read(selectedCategoryProvider) ?? ParkingCategory.colleges;
     final imageUrl = selectedCategory.imageUrl;
+    final color = context.isDarkMode ? Colors.white : Colors.black;
     const verticalSpace = VerticalSpace(space: 16.0);
 
     ref.listen(parkingSpaceStreamProvider,
@@ -58,7 +59,7 @@ class AreaPage extends ConsumerWidget {
                       Text(
                         selectedCategory.header.toUpperCase(),
                         style: TextStyles.extraBold.copyWith(
-                          color: context.isDarkMode ? Colors.white : Colors.black,
+                          color: color,
                           overflow: TextOverflow.ellipsis,
                           fontSize: 32.0,
                           letterSpacing: areaPageHeaderSpacing,
@@ -66,7 +67,7 @@ class AreaPage extends ConsumerWidget {
                       ),
                       AreaCountLabel(
                         label: totalAvailableSpotLabel,
-                        style: TextStyles.regular.copyWith(color: context.isDarkMode ? Colors.white : Colors.black),
+                        style: TextStyles.regular.copyWith(color: color),
                       ),
                     ],
                   ),
