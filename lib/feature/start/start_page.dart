@@ -19,7 +19,7 @@ class StartPage extends ConsumerWidget {
     if (hasError) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(next.error.toString())));
     } else if (previous?.isLoading == true && !hasError) {
-      context.pushNamed(CategoryPage.route);
+      context.goNamed(CategoryPage.route);
     }
   }
 
