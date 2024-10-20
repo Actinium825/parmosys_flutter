@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
@@ -30,4 +31,12 @@ extension ParkingSpaceExt on ParkingSpace {
 extension ParkingSpaceDtoExt on ParkingSpaceDto {
   bool isMatch(ParkingSpaceDto updatedParkingSpace) =>
       number == updatedParkingSpace.number && area == updatedParkingSpace.area;
+}
+
+extension DocumentChangeTypeExt on DocumentChangeType {
+  String toEventString() => switch (this) {
+        DocumentChangeType.added => create,
+        DocumentChangeType.modified => update,
+        DocumentChangeType.removed => delete,
+      };
 }

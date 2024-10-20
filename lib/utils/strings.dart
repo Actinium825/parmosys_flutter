@@ -52,3 +52,7 @@ const digits = r'\d+';
 const delete = 'delete';
 const update = 'update';
 const create = 'create';
+
+// Database
+const appwrite = 'appwrite';
+const firebase = 'firebase';

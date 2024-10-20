@@ -12,8 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
   appwrite: ^13.0.0
+  cloud_firestore: ^5.4.4
   cupertino_icons: ^1.0.8
   dartx: ^1.2.0
+  firebase_core: ^3.6.0
   flutter_carousel_widget: ^3.0.1
   flutter_riverpod: ^2.5.1
   freezed: ^2.5.7

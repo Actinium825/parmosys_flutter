@@ -6,7 +6,7 @@ import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:sprintf/sprintf.dart';
 
-final parkingSpaceStreamProvider = StreamProvider.autoDispose((ref) {
+final appwriteStreamProvider = StreamProvider.autoDispose<RealtimeMessage>((ref) {
   final client = ref.read(appwriteClientProvider);
   final realtime = Realtime(client);
 

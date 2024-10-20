@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "",
+    "project_id": "",
+    "storage_bucket": ""
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1041959885753:android:7a25fee7c3b77dc039f468",
+        "android_client_info": {
+          "package_name": "com.example.parmosys_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": ""
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": ""
+}

@@ -10,14 +10,16 @@
    class Env {
       static const endpoint = '{your appwrite endpoint}';
       static const projectId = '{your appwrite project id}';
-      static const databaseId = '{database id where collection is found}';
+      static const databaseId = '{appwrite database id where collection is found}';
+      static const database = '{appwrite or firebase}';
     }
    ```
 
    </details>
-3. Run `flutter pub get`
-4. Run `dart format -l 120 --set-exit-if-changed .`
-5. Run `flutter pub run build_runner build --delete-conflicting-outputs`
+3. If using Firebase, replace `google-services.json` in `android/app/{google-services.json}` 
+4. Run `flutter pub get`
+5. Run `dart format -l 120 --set-exit-if-changed .`
+6. Run `flutter pub run build_runner build --delete-conflicting-outputs`
 
 ## Features
 - Flutter Carousel Widget
@@ -25,7 +27,7 @@
 - GoRouter
 - Shared Preferences
 - Package Info Plus
-- AppWrite
+- Realtime Database (Appwrite or Firebase)
 - Freezed
 - Isar
 

@@ -18,6 +18,15 @@ class ParkingSpaceCard extends ConsumerWidget {
 
     return parkingSpacesValue.maybeWhen(
       data: (parkingSpaces) {
+        if (parkingSpaces.isEmpty) {
+          return Center(
+            child: Text(
+              noDataLabel,
+              style: TextStyles.bold.copyWith(fontSize: 24.0),
+            ),
+          );
+        }
+
         final totalCount = parkingSpaces.length;
         final leftCount = (totalCount / 2).ceil();
         final divider = SizedBox(

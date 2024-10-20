@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_preview_screenshot/device_preview_screenshot.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/home.dart';
@@ -15,6 +16,8 @@ void main() async {
 
   final directory = await getApplicationDocumentsDirectory();
   final prefs = await SharedPreferences.getInstance();
+
+  await Firebase.initializeApp();
 
   runApp(
     ProviderScope(

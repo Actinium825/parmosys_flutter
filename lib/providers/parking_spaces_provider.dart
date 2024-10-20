@@ -1,5 +1,4 @@
 import 'package:appwrite/appwrite.dart';
-import 'package:dartx/dartx.dart';
 import 'package:isar/isar.dart';
 import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
@@ -35,7 +34,7 @@ class ParkingSpaces extends _$ParkingSpaces {
     final futures = <Future<void>>[];
 
     for (final area in areas) {
-      futures.add(getDocuments(database, isar, area.toSnakeCase()));
+      futures.add(_getDocuments(database, isar, area.toSnakeCase()));
     }
 
     try {
@@ -47,14 +46,15 @@ class ParkingSpaces extends _$ParkingSpaces {
     loadingState.removeLoading();
   }
 
-  Future<void> getDocuments(Databases database, Isar isar, String collectionId) async {
+  Future<void> _getDocuments(Databases database, Isar isar, String collectionId) async {
     final results = await database.listDocuments(
       databaseId: Env.databaseId,
       collectionId: collectionId,
     );
     final parkingSpaceDtos = isar.parkingSpaceDtos;
+    final documents = results.documents;
 
-    for (final document in results.documents) {
+    for (final document in documents) {
       final parkingSpace = ParkingSpace.fromJson(document.data).toDto();
       final existingLocalID = parkingSpaceDtos
           .filter()
@@ -68,14 +68,13 @@ class ParkingSpaces extends _$ParkingSpaces {
     }
   }
 
-  void updateParkingSpace(RealtimeMessage value) {
-    final updatedParkingSpace = ParkingSpace.fromJson(value.payload).toDto();
-    final event = value.events.firstOrNull?.split('.').lastOrNull ?? '';
+  void updateParkingSpace(Map<String, dynamic> data, String event) {
+    final updatedParkingSpace = ParkingSpace.fromJson(data).toDto();
     final isar = ref.read(isarInstanceProvider);
     final parkingSpaceDtos = isar.parkingSpaceDtos;
 
     switch (event) {
-      case update:
+      case update || create:
         final existingParkingSpace = parkingSpaceDtos
             .filter()
             .areaEqualTo(updatedParkingSpace.area)
@@ -84,12 +83,7 @@ class ParkingSpaces extends _$ParkingSpaces {
             .build()
             .findFirstSync();
 
-        if (existingParkingSpace != null) {
-          isar.writeTxnSync(
-              () => parkingSpaceDtos.putSync(updatedParkingSpace..localID = existingParkingSpace.localID));
-        }
-      case create:
-        isar.writeTxnSync(() => parkingSpaceDtos.putSync(updatedParkingSpace));
+        isar.writeTxnSync(() => parkingSpaceDtos.putSync(updatedParkingSpace..localID = existingParkingSpace?.localID));
       case delete:
         final deletedLocalID = parkingSpaceDtos
             .filter()
