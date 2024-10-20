@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:parmosys_flutter/feature/home.dart';
 import 'package:parmosys_flutter/providers/app_documents_directory_provider.dart';
 import 'package:parmosys_flutter/providers/shared_preferences_provider.dart';
+import 'package:parmosys_flutter/utils/env.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +18,7 @@ void main() async {
   final directory = await getApplicationDocumentsDirectory();
   final prefs = await SharedPreferences.getInstance();
 
-  await Firebase.initializeApp();
+  if (Env.database == firebase) await Firebase.initializeApp();
 
   runApp(
     ProviderScope(
