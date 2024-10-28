@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:parmosys_flutter/utils/strings.dart';
 
 part 'parking_space.freezed.dart';
 part 'parking_space.g.dart';
