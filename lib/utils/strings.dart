@@ -1,10 +1,10 @@
-import 'package:parmosys_flutter/utils/env.dart';
-
 const initialRoute = '/';
 const themeModeKey = 'themeMode';
 const viewModeKey = 'viewMode';
 const downloadDirectory = '/storage/emulated/0/Download';
-const parkingSpaceChannel = 'databases.${Env.databaseId}.collections.%s.documents';
+const parkingSpaceChannel = 'databases.$appwriteDatabaseId.collections.%s.documents';
+const appwriteDatabaseId = 'parking_spaces';
+const appwriteEndpoint = 'https://cloud.appwrite.io/v1';
 
 // Home
 const startButtonLabel = 'START';

@@ -3,9 +3,6 @@
 *.freezed.dart
 **/lib/gen
 
-#env
-lib/utils/env.dart
-
 # Miscellaneous
 *.class
 *.log

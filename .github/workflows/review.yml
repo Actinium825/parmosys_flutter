@@ -30,17 +30,6 @@ jobs:
       - name: Flutter Version
         run: flutter --version
 
-      - name: Create env.dart
-        run: |
-          cat <<EOF > lib/utils/env.dart
-          class Env {
-            static const endpoint = '';
-            static const projectId = '';
-            static const databaseId = '';
-            static const database = '';
-          }
-          EOF
-
       - name: Install Dependencies
         run: flutter pub get
 

@@ -8,7 +8,6 @@ analyzer:
   plugins:
     - custom_lint
   exclude:
-    - "lib/utils/env.dart"
     - "**/*.g.dart"
     - "**/*.freezed.dart"
   errors:
