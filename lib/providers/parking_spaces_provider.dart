@@ -1,11 +1,11 @@
 import 'package:appwrite/appwrite.dart';
+import 'package:flutter/material.dart';
 import 'package:isar/isar.dart';
 import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/providers/appwrite_client_provider.dart';
 import 'package:parmosys_flutter/providers/loading_state_provider.dart';
 import 'package:parmosys_flutter/providers/isar_provider.dart';
-import 'package:parmosys_flutter/utils/env.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -31,16 +31,14 @@ class ParkingSpaces extends _$ParkingSpaces {
     final database = Databases(client);
     final isar = ref.read(isarInstanceProvider);
     final areas = [...collegesAreas, ...hallsAreas, ...recreationalAreas];
-    final futures = <Future<void>>[];
-
-    for (final area in areas) {
-      futures.add(_getDocuments(database, isar, area.toSnakeCase()));
-    }
 
     try {
-      await Future.wait(futures);
-    } catch (error, stackTrace) {
-      loadingState.setError(error, stackTrace);
+      await Future.forEach(
+        areas,
+        (area) => _getDocuments(database, isar, area.toSnakeCase()),
+      );
+    } catch (e) {
+      debugPrint(e.toString());
     }
 
     loadingState.removeLoading();
@@ -48,7 +46,7 @@ class ParkingSpaces extends _$ParkingSpaces {
 
   Future<void> _getDocuments(Databases database, Isar isar, String collectionId) async {
     final results = await database.listDocuments(
-      databaseId: Env.databaseId,
+      databaseId: appwriteDatabaseId,
       collectionId: collectionId,
     );
     final parkingSpaceDtos = isar.parkingSpaceDtos;

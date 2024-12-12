@@ -2,24 +2,26 @@
 
 ## Steps to run
 1. Update to latest Flutter version
-2. Place `env.dart` in `lib/utils/env.dart`
+2. Setup database:
    <details>
-   <summary>env.dart</summary>
-
-   ```
-   class Env {
-      static const endpoint = '{your appwrite endpoint}';
-      static const projectId = '{your appwrite project id}';
-      static const databaseId = '{appwrite database id where collection is found}';
-      static const database = '{appwrite or firebase}';
-    }
-   ```
+   <summary>Appwrite</summary>
+    
+     1. Copy your Appwrite's Project ID and replace `projectId` in `lib/utils/env.dart`
+     2. Set `database` in `lib/utils/env.dart` to `appwrite` 
 
    </details>
-3. If using Firebase, replace `google-services.json` in `android/app/{google-services.json}` 
-4. Run `flutter pub get`
+
+   <details>
+   <summary>Firebase</summary>
+   
+     1. Add Android to your Firebase project with package name `com.example.parmosys_flutter`
+     2. Download the `google-services.json` and replace in `android/app/{google-services.json}`
+     3. Set `database` in `lib/utils/env.dart` to `firebase`
+   
+   </details>
+3. Run `flutter pub get`
+4. Run `flutter pub run build_runner build --delete-conflicting-outputs`
 5. Run `dart format -l 120 --set-exit-if-changed .`
-6. Run `flutter pub run build_runner build --delete-conflicting-outputs`
 
 ## Features
 - Flutter Carousel Widget
