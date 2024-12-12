@@ -75,7 +75,7 @@ class ParmosysScaffold extends StatelessWidget {
                 const VerticalSpace(space: 20.0),
                 Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: Colors.black.withValues(alpha: 0.4),
                     borderRadius: borderRadius,
                   ),
                   height: searchTextHeight,
