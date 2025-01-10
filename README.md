@@ -1,10 +1,17 @@
 # Flutter App for Project Parmosys
 
 A Flutter Mobile App in tandem with Parmosys Tensorflow Yolov4 Python App to show the available parking spaces in realtime. 
-Choose either Appwrite or Firebase whichever was used in the python app. 
-The state management for the mobile app is Riverpod with Shared Prefs and isar for the local database. 
+Choose either Appwrite or Firebase whichever was used in the Python App. 
+The state management for the mobile app is Riverpod with Shared Prefs for saving the selected theme and card view modes.
+Isar is applied for the local database, storing the parking spaces data. 
 GoRouter is used for routing. 
 This is my thesis project for my 4th year at university so areas/spaces in the mobile app are from there.
+
+## Contents
+- [Steps to run](#steps-to-run)
+- [Features](#features)
+- [Credits](#credits)
+- [Screenshots](#screenshots)
 
 ## Steps to run
 1. Update to latest Flutter version
