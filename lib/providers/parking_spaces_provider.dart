@@ -30,7 +30,9 @@ class ParkingSpaces extends _$ParkingSpaces {
     final client = ref.read(appwriteClientProvider);
     final database = Databases(client);
     final isar = ref.read(isarInstanceProvider);
-    final areas = [...collegesAreas, ...hallsAreas, ...recreationalAreas];
+    final areas = collegesAreas
+      ..followedBy(hallsAreas)
+      ..followedBy(recreationalAreas);
 
     try {
       await Future.forEach(

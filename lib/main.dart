@@ -27,10 +27,9 @@ void main() async {
         sharedPreferencesProvider.overrideWithValue(prefs),
       ],
       child: DevicePreview(
-        tools: [
-          ...DevicePreview.defaultTools,
+        tools: DevicePreview.defaultTools.followedBy([
           DevicePreviewScreenshot(onScreenshot: screenshotAsFiles(Directory(downloadDirectory))),
-        ],
+        ]).toList(),
         builder: (_) => const Home(),
       ),
     ),
