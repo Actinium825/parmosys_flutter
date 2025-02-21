@@ -27,6 +27,7 @@ void main() async {
         sharedPreferencesProvider.overrideWithValue(prefs),
       ],
       child: DevicePreview(
+        enabled: false,
         tools: DevicePreview.defaultTools.followedBy([
           DevicePreviewScreenshot(onScreenshot: screenshotAsFiles(Directory(downloadDirectory))),
         ]).toList(),
