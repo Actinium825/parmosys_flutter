@@ -28,8 +28,10 @@ This is my thesis project for my 4th year at university so areas/spaces in the m
    <summary>Firebase</summary>
    
      1. Add Android to your Firebase project with package name `com.example.parmosys_flutter`
-     2. Download the `google-services.json` and replace in `android/app/{google-services.json}`
-     3. Set `database` in `lib/utils/env.dart` to `firebase`
+     2. Download the `google-services.json` and replace in `android/app`
+     3. Add iOS to your Firebase project with bundle ID `com.example.parmosysFlutter`
+     4. Download the `GoogleService-Info.plist` and using Xcode, place under `Runner`
+     5. Set `database` in `lib/utils/env.dart` to `firebase`
    
    </details>
 3. Run `flutter pub get`

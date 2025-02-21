@@ -7,7 +7,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1041959885753:android:7a25fee7c3b77dc039f468",
+        "mobilesdk_app_id": "1:1:android:1",
         "android_client_info": {
           "package_name": "com.example.parmosys_flutter"
         }
