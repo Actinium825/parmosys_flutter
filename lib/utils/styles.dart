@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:parmosys_flutter/gen/fonts.gen.dart';
 
 class TextStyles {
-  static const TextStyle ralewayStyles = TextStyle(
+  static const ralewayStyles = TextStyle(
     fontFamily: FontFamily.raleway,
     color: Colors.white,
   );
