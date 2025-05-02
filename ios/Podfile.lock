@@ -1,5 +1,5 @@
 PODS:
-  - cloud_firestore (5.6.6):
+  - cloud_firestore (5.6.7):
     - Firebase/Firestore (= 11.10.0)
     - firebase_core
     - Flutter
@@ -77,7 +77,7 @@ DEPENDENCIES:
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
-  - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`)
+  - FirebaseFirestore (from `https://github.com/invertase/firestore-ios-sdk-frameworks.git`, tag `11.10.0`)
   - Flutter (from `Flutter`)
   - flutter_web_auth_2 (from `.symlinks/plugins/flutter_web_auth_2/ios`)
   - isar_flutter_libs (from `.symlinks/plugins/isar_flutter_libs/ios`)
@@ -112,6 +112,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/firebase_core/ios"
   FirebaseFirestore:
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
+    :tag: 11.10.0
   Flutter:
     :path: Flutter
   flutter_web_auth_2:
@@ -129,11 +130,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   FirebaseFirestore:
-    :commit: e43715cc392c819b522c7a189bed9400e757c788
     :git: https://github.com/invertase/firestore-ios-sdk-frameworks.git
+    :tag: 11.10.0
 
 SPEC CHECKSUMS:
-  cloud_firestore: 07742f115155e19201e77b4cafb155011892d7b7
+  cloud_firestore: b7b3bfffcd2ea3205f612d5602f959a0ec33c7b0
   device_info_plus: 71ffc6ab7634ade6267c7a93088ed7e4f74e5896
   Firebase: 1fe1c0a7d9aaea32efe01fbea5f0ebd8d70e53a2
   firebase_core: 2d4534e7b489907dcede540c835b48981d890943
@@ -149,7 +150,7 @@ SPEC CHECKSUMS:
   FirebaseFirestoreInternalBinary: 96b309279c4efdf00b83ab80e8af4d0a73d30258
   FirebaseSharedSwift: 1baacae75939499b5def867cbe34129464536a38
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  flutter_web_auth_2: 5c8d9dcd7848b5a9efb086d24e7a9adcae979c80
+  flutter_web_auth_2: 3464a7c16dc6480b6194fc89913bae6e82f28405
   GoogleUtilities: 26a3abef001b6533cf678d3eb38fd3f614b7872d
   isar_flutter_libs: bc909e72c3d756c2759f14c8776c13b5b0556e26
   leveldb-library: cc8b8f8e013647a295ad3f8cd2ddf49a6f19be19
@@ -159,6 +160,6 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: 9e1978ff2562383bd5676f64ec4e9aa8fa06a6f7
   url_launcher_ios: 694010445543906933d732453a59da0a173ae33d
 
-PODFILE CHECKSUM: 5e3fe5d72f23c0c1bb0e47fda996779c9ffb1080
+PODFILE CHECKSUM: e5841d658b881c10826645054718d30b34a4d649
 
 COCOAPODS: 1.16.2
