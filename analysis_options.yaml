@@ -55,4 +55,3 @@ linter:
     prefer_const_declarations: true
     prefer_const_literals_to_create_immutables: true
     omit_obvious_property_types: true
-    strict_top_level_inference: true
