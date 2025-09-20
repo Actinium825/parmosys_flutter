@@ -68,7 +68,7 @@ class ParmosysDrawer extends ConsumerWidget {
                         value: ref.read(selectedThemeProvider) == ThemeMode.dark,
                         onChanged: (isDarkMode) => _onChangeThemeMode(ref, isDarkMode),
                         inactiveThumbColor: Colors.black,
-                        activeColor: Colors.white,
+                        activeThumbColor: Colors.white,
                         trackColor: WidgetStatePropertyAll(isDarkMode ? drawerDarkColor : Colors.white),
                         trackOutlineColor: const WidgetStatePropertyAll(Colors.transparent),
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

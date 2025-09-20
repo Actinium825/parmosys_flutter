@@ -4,7 +4,7 @@ part 'parking_space.freezed.dart';
 part 'parking_space.g.dart';
 
 @freezed
-class ParkingSpace with _$ParkingSpace {
+abstract class ParkingSpace with _$ParkingSpace {
   const factory ParkingSpace({
     @JsonKey(name: '\$id') String? id,
     @JsonKey(name: '\$collectionId') String? collectionId,

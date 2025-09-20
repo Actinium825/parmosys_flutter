@@ -1,6 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
-import 'package:isar/isar.dart';
+import 'package:isar_community/isar.dart';
 import 'package:parmosys_flutter/models/dto/parking_space_dto.dart';
 import 'package:parmosys_flutter/models/parking_space.dart';
 import 'package:parmosys_flutter/providers/appwrite_client_provider.dart';
@@ -28,7 +28,7 @@ class ParkingSpaces extends _$ParkingSpaces {
     loadingState.setLoading();
 
     final client = ref.read(appwriteClientProvider);
-    final database = Databases(client);
+    final tablesDB = TablesDB(client);
     final isar = ref.read(isarInstanceProvider);
     final areas = collegesAreas
       ..followedBy(hallsAreas)
@@ -37,7 +37,7 @@ class ParkingSpaces extends _$ParkingSpaces {
     try {
       await Future.forEach(
         areas,
-        (area) => _getDocuments(database, isar, area.toSnakeCase()),
+        (area) => _getDocuments(tablesDB, isar, area.toSnakeCase()),
       );
     } catch (e) {
       debugPrint(e.toString());
@@ -46,16 +46,16 @@ class ParkingSpaces extends _$ParkingSpaces {
     loadingState.removeLoading();
   }
 
-  Future<void> _getDocuments(Databases database, Isar isar, String collectionId) async {
-    final results = await database.listDocuments(
+  Future<void> _getDocuments(TablesDB tablesDB, Isar isar, String tableId) async {
+    final results = await tablesDB.listRows(
       databaseId: appwriteDatabaseId,
-      collectionId: collectionId,
+      tableId: tableId,
     );
     final parkingSpaceDtos = isar.parkingSpaceDtos;
-    final documents = results.documents;
+    final rows = results.rows;
 
-    for (final document in documents) {
-      final parkingSpace = ParkingSpace.fromJson(document.data).toDto();
+    for (final row in rows) {
+      final parkingSpace = ParkingSpace.fromJson(row.data).toDto();
       final existingLocalID = parkingSpaceDtos
           .filter()
           .areaEqualTo(parkingSpace.area)
