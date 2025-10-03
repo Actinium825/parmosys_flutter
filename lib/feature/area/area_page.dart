@@ -18,8 +18,6 @@ import 'package:parmosys_flutter/widgets/spacings.dart';
 class AreaPage extends ConsumerWidget {
   const AreaPage({super.key});
 
-  static const route = 'area';
-
   void _realtimeListener(WidgetRef ref) {
     switch (Env.database) {
       case firebase:

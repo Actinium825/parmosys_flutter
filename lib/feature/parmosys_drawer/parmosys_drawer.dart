@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/parmosys_drawer_button.dart';
 import 'package:parmosys_flutter/feature/parmosys_drawer/view_button.dart';
@@ -9,6 +8,7 @@ import 'package:parmosys_flutter/providers/selected_theme_provider.dart';
 import 'package:parmosys_flutter/providers/selected_view_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
 import 'package:parmosys_flutter/utils/extension.dart';
+import 'package:parmosys_flutter/utils/router.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
@@ -16,7 +16,7 @@ import 'package:parmosys_flutter/widgets/spacings.dart';
 class ParmosysDrawer extends ConsumerWidget {
   const ParmosysDrawer({super.key});
 
-  void _onPressExit(BuildContext context) => context.goNamed(initialRoute);
+  void _onPressExit(BuildContext context) => StartRoute().go(context);
 
   Future<String> get _getVersionNumber async {
     final packageInfo = await PackageInfo.fromPlatform();

@@ -39,6 +39,7 @@ dev_dependencies:
   device_preview_screenshot: ^1.0.0
   flutter_gen_runner: ^5.11.0
   flutter_lints: ^6.0.0
+  go_router_builder: ^4.1.0
   isar_community_generator:
     version: *isar_version
   json_serializable: ^6.11.1
