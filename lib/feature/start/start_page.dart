@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
-import 'package:parmosys_flutter/feature/category/category_page.dart';
 import 'package:parmosys_flutter/feature/start/start_button.dart';
 import 'package:parmosys_flutter/gen/assets.gen.dart';
 import 'package:parmosys_flutter/providers/loading_state_provider.dart';
 import 'package:parmosys_flutter/utils/const.dart';
+import 'package:parmosys_flutter/utils/router.dart';
 import 'package:parmosys_flutter/utils/strings.dart';
 import 'package:parmosys_flutter/utils/styles.dart';
 import 'package:parmosys_flutter/widgets/spacings.dart';
@@ -19,7 +18,7 @@ class StartPage extends ConsumerWidget {
     if (hasError) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(next.error.toString())));
     } else if (previous?.isLoading == true && !hasError) {
-      context.goNamed(CategoryPage.route);
+      CategoryRoute().go(context);
     }
   }
 

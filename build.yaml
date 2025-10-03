@@ -1,11 +1,13 @@
 targets:
   $default:
     builders:
-      riverpod_generator:
-        enabled: true
+      go_router_builder:
         generate_for:
-          exclude:
-            - lib
+          include:
+            - lib/utils/router.dart
+
+      riverpod_generator:
+        generate_for:
           include:
             - lib/providers/*
 
@@ -13,23 +15,15 @@ targets:
         options:
           explicit_to_json: true
         generate_for:
-          exclude:
-            - lib
           include:
             - lib/models/*
 
       freezed:
-        enabled: true
         generate_for:
-          exclude:
-            - lib
           include:
             - lib/models/*
 
       isar_community_generator:
-        enabled: true
         generate_for:
-          exclude:
-            - lib
           include:
             - lib/models/dto/*

@@ -15,8 +15,6 @@ import 'package:sprintf/sprintf.dart';
 class ParkingSpacePage extends ConsumerWidget {
   const ParkingSpacePage({super.key});
 
-  static const route = 'parking-space';
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedArea = ref.watch(selectedAreaProvider);
