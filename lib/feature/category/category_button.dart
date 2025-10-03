@@ -41,12 +41,14 @@ class CategoryButton extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     height: categoryButtonBackgroundHeight,
                     width: categoryButtonBackgroundWidth,
-                    decoration: BoxDecoration(
-                      color: isDarkMode ? cardButtonDarkColor : cardButtonLightColor,
-                      borderRadius: borderRadius,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        color: isDarkMode ? cardButtonDarkColor : cardButtonLightColor,
+                        borderRadius: borderRadius,
+                      ),
                     ),
                   ),
                   Positioned(

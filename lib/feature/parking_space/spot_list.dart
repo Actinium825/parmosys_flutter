@@ -13,14 +13,12 @@ class SpotList extends StatelessWidget {
     required this.parkingSpaces,
     required this.divider,
     this.alignment = Alignment.topLeft,
-    this.initialSpotCount,
     super.key,
   });
 
   final List<ParkingSpaceDto> parkingSpaces;
   final Alignment alignment;
   final Widget divider;
-  final int? initialSpotCount;
 
   @override
   Widget build(BuildContext context) {
