@@ -40,3 +40,23 @@ extension DocumentChangeTypeExt on DocumentChangeType {
         DocumentChangeType.removed => delete,
       };
 }
+
+extension ListExt<T> on List<T> {
+  List<E> forLoop<E>(E Function(T element) callback) {
+    final result = <E>[];
+
+    for (int index = 0; index < length; index++) {
+      final mappedValue = callback(this[index]);
+      result.add(mappedValue);
+    }
+
+    return result;
+  }
+
+  bool everyForLoop(bool Function(T element) test) {
+    for (int index = 0; index < length; index++) {
+      if (!test(this[index])) return false;
+    }
+    return true;
+  }
+}

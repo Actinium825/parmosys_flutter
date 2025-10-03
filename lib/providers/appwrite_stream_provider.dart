@@ -12,7 +12,7 @@ final appwriteStreamProvider = StreamProvider.autoDispose<RealtimeMessage>((ref)
 
   final selectedCategory = ref.read(selectedCategoryProvider);
   final areas = [...?selectedCategory?.areas];
-  final collections = areas.map((area) => sprintf(parkingSpaceChannel, [area.toSnakeCase()])).toList();
+  final collections = areas.forLoop((area) => sprintf(parkingSpaceChannel, [area.toSnakeCase()]));
   final subscription = realtime.subscribe(collections);
 
   return subscription.stream;

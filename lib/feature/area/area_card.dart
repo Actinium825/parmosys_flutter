@@ -32,7 +32,7 @@ class AreaCard extends ConsumerWidget {
 
   bool _isAcronym() {
     final letters = area.split('');
-    return letters.every((letter) => letter == letter.toUpperCase());
+    return letters.everyForLoop((letter) => letter == letter.toUpperCase());
   }
 
   @override
