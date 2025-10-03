@@ -24,22 +24,19 @@ class AreaPage extends ConsumerWidget {
         final selectedCategory = ref.read(selectedCategoryProvider);
         final areas = [...?selectedCategory?.areas];
 
-        for (final area in areas) {
+        areas.forLoop((area) {
           ref.listen(
             firebaseStreamProvider(area.toSnakeCase()),
             (_, next) => next.whenData(
-              (value) {
-                final docChanges = value.docChanges;
-                for (final docChange in docChanges) {
-                  final data = {...?docChange.doc.data()};
-                  final event = docChange.type.toEventString();
+              (value) => value.docChanges.forLoop((docChange) {
+                final data = {...?docChange.doc.data()};
+                final event = docChange.type.toEventString();
 
-                  ref.read(parkingSpacesProvider().notifier).updateParkingSpace(data, event);
-                }
-              },
+                ref.read(parkingSpacesProvider().notifier).updateParkingSpace(data, event);
+              }),
             ),
           );
-        }
+        });
       case appwrite:
         ref.listen(
           appwriteStreamProvider,

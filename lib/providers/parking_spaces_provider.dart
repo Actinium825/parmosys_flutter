@@ -35,9 +35,10 @@ class ParkingSpaces extends _$ParkingSpaces {
       ..followedBy(recreationalAreas);
 
     try {
-      await Future.forEach(
-        areas,
-        (area) => _getDocuments(tablesDB, isar, area.toSnakeCase()),
+      await Future.wait(
+        areas.forLoop(
+          (area) => _getDocuments(tablesDB, isar, area.toSnakeCase()),
+        ),
       );
     } catch (e) {
       debugPrint(e.toString());
@@ -52,9 +53,8 @@ class ParkingSpaces extends _$ParkingSpaces {
       tableId: tableId,
     );
     final parkingSpaceDtos = isar.parkingSpaceDtos;
-    final rows = results.rows;
 
-    for (final row in rows) {
+    results.rows.forLoop((row) {
       final parkingSpace = ParkingSpace.fromJson(row.data).toDto();
       final existingLocalID = parkingSpaceDtos
           .filter()
@@ -65,7 +65,7 @@ class ParkingSpaces extends _$ParkingSpaces {
           .findFirstSync();
 
       isar.writeTxnSync(() => parkingSpaceDtos.putSync(parkingSpace..localID = existingLocalID));
-    }
+    });
   }
 
   void updateParkingSpace(Map<String, dynamic> data, String event) {
