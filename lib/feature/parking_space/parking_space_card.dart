@@ -48,7 +48,6 @@ class ParkingSpaceCard extends ConsumerWidget {
             SpotList(
               alignment: Alignment.topRight,
               divider: divider,
-              initialSpotCount: leftCount,
               parkingSpaces: parkingSpaces.sublist(leftCount),
             ),
           ],

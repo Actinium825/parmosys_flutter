@@ -97,10 +97,12 @@ class ParkingSpacePage extends ConsumerWidget {
               ),
               decoration: BoxDecoration(color: backgroundColor),
             ),
-            Container(
+            DecoratedBox(
               decoration: decoration,
-              padding: parkingSpaceCardPadding,
-              child: const ParkingSpaceCard(),
+              child: const Padding(
+                padding: parkingSpaceCardPadding,
+                child: ParkingSpaceCard(),
+              ),
             ),
           ],
         ),

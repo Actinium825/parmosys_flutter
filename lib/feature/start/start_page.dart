@@ -25,10 +25,7 @@ class StartPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const spacer = Spacer();
-
     ref.listen(loadingStateProvider, (previous, next) => _loadingStateListener(context, previous, next));
-
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: Padding(
@@ -36,7 +33,7 @@ class StartPage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            spacer,
+            const Spacer(),
             Image.asset(Assets.png.lancer.path),
             const VerticalSpace(space: 32.0),
             FittedBox(
@@ -52,9 +49,9 @@ class StartPage extends ConsumerWidget {
                 style: TextStyles.light.copyWith(fontSize: 16),
               ),
             ),
-            spacer,
+            const Spacer(),
             const StartButton(),
-            spacer,
+            const Spacer(),
           ],
         ),
       ),

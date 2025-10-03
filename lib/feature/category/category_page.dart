@@ -29,7 +29,7 @@ class CategoryPage extends ConsumerWidget {
           alignment: Alignment.centerRight,
           child: Image.asset(
             Assets.png.lancerSide.path,
-            width: MediaQuery.of(context).size.width * lancerSideImageMultiplier,
+            width: MediaQuery.sizeOf(context).width * lancerSideImageMultiplier,
           ),
         ),
       ),

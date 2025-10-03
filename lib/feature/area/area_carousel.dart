@@ -22,13 +22,7 @@ class AreaCarousel extends ConsumerStatefulWidget {
 }
 
 class _AreaCarouselState extends ConsumerState<AreaCarousel> {
-  late final ValueNotifier<int> _currentIndexNotifier;
-
-  @override
-  void initState() {
-    _currentIndexNotifier = ValueNotifier(0);
-    super.initState();
-  }
+  late final _currentIndexNotifier = ValueNotifier(0);
 
   @override
   void dispose() {
