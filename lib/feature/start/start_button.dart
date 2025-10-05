@@ -12,10 +12,10 @@ class StartButton extends ConsumerWidget {
   const StartButton({super.key});
 
   void _onPressStart(BuildContext context, WidgetRef ref) => switch (Env.database) {
-        appwrite => ref.read(parkingSpacesProvider().notifier).getAllDocuments(),
-        firebase => CategoryRoute().go(context),
-        _ => throw UnimplementedError('No database selected'),
-      };
+    appwrite => ref.read(parkingSpacesProvider().notifier).getAllDocuments(),
+    firebase => CategoryRoute().go(context),
+    _ => throw UnimplementedError('No database selected'),
+  };
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

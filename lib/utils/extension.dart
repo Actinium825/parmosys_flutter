@@ -35,10 +35,10 @@ extension ParkingSpaceDtoExt on ParkingSpaceDto {
 
 extension DocumentChangeTypeExt on DocumentChangeType {
   String toEventString() => switch (this) {
-        DocumentChangeType.added => create,
-        DocumentChangeType.modified => update,
-        DocumentChangeType.removed => delete,
-      };
+    DocumentChangeType.added => create,
+    DocumentChangeType.modified => update,
+    DocumentChangeType.removed => delete,
+  };
 }
 
 extension ListExt<T> on List<T> {

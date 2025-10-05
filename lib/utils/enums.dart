@@ -22,11 +22,11 @@ enum ParkingCategory {
       ParkingCategory.colleges => [png.chtm.path, png.cict.path, png.law.path, png.cssp.path][index],
       ParkingCategory.halls => png.hall.path,
       ParkingCategory.recreational => [
-          png.activityCenter.path,
-          png.heroesPark.path,
-          png.library.path,
-          png.universityHostel.path
-        ][index],
+        png.activityCenter.path,
+        png.heroesPark.path,
+        png.library.path,
+        png.universityHostel.path,
+      ][index],
     };
   }
 }

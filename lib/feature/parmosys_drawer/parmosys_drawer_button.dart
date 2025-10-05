@@ -49,7 +49,7 @@ class ParmosysDrawerButton extends StatelessWidget {
               if (suffix != null) ...[
                 const Spacer(),
                 suffix!,
-              ]
+              ],
             ],
           ),
         ),

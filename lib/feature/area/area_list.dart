@@ -20,18 +20,18 @@ class AreaList extends StatelessWidget {
     const png = Assets.png;
     return switch (selectedCategory) {
       ParkingCategory.colleges => [
-          png.chtmFront.path,
-          png.cictFront.path,
-          png.lawFront.path,
-          png.csspFront.path
-        ][index],
+        png.chtmFront.path,
+        png.cictFront.path,
+        png.lawFront.path,
+        png.csspFront.path,
+      ][index],
       ParkingCategory.halls => png.hallFront.path,
       ParkingCategory.recreational => [
-          png.activityCenterFront.path,
-          png.heroesParkFront.path,
-          png.libraryFront.path,
-          png.universityHostelFront.path
-        ][index],
+        png.activityCenterFront.path,
+        png.heroesParkFront.path,
+        png.libraryFront.path,
+        png.universityHostelFront.path,
+      ][index],
     };
   }
 
