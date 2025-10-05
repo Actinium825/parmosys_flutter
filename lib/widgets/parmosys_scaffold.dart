@@ -103,7 +103,7 @@ class ParmosysScaffold extends StatelessWidget {
               margin: EdgeInsets.zero,
               child: cardBody,
             ),
-          )
+          ),
         ],
       ),
     );

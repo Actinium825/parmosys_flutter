@@ -64,15 +64,16 @@ class AreaCard extends ConsumerWidget {
               ),
               Align(
                 alignment: isSelected ? Alignment.bottomRight : Alignment.bottomCenter,
-                child: isSelected
-                    ? AreaCountLabel(
-                        area: area,
-                        style: TextStyles.medium.copyWith(fontSize: 12.0),
-                      )
-                    : Text(
-                        area,
-                        style: bold,
-                      ),
+                child: switch (isSelected) {
+                  true => AreaCountLabel(
+                    area: area,
+                    style: TextStyles.medium.copyWith(fontSize: 12.0),
+                  ),
+                  false => Text(
+                    area,
+                    style: bold,
+                  ),
+                },
               ),
             ],
           ),

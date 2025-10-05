@@ -16,15 +16,10 @@ import 'package:parmosys_flutter/widgets/spacings.dart';
 class ParmosysDrawer extends ConsumerWidget {
   const ParmosysDrawer({super.key});
 
-  void _onPressExit(BuildContext context) => StartRoute().go(context);
-
   Future<String> get _getVersionNumber async {
     final packageInfo = await PackageInfo.fromPlatform();
     return packageInfo.version;
   }
-
-  void _onChangeThemeMode(WidgetRef ref, bool isDarkMode) =>
-      ref.read(selectedThemeProvider.notifier).changeThemeMode(isDarkMode);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -66,7 +61,7 @@ class ParmosysDrawer extends ConsumerWidget {
                     child: FittedBox(
                       child: Switch(
                         value: ref.read(selectedThemeProvider) == ThemeMode.dark,
-                        onChanged: (isDarkMode) => _onChangeThemeMode(ref, isDarkMode),
+                        onChanged: ref.read(selectedThemeProvider.notifier).changeThemeMode,
                         inactiveThumbColor: Colors.black,
                         activeThumbColor: Colors.white,
                         trackColor: WidgetStatePropertyAll(isDarkMode ? drawerDarkColor : Colors.white),
@@ -93,7 +88,7 @@ class ParmosysDrawer extends ConsumerWidget {
                 verticalSpace,
                 ParmosysDrawerButton(
                   label: exitLabel,
-                  onTap: () => _onPressExit(context),
+                  onTap: () => StartRoute().go(context),
                   iconColor: Colors.red,
                   icon: Icons.exit_to_app_rounded,
                 ),

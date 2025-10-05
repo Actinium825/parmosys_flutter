@@ -11,7 +11,7 @@ part 'router.g.dart';
 final router = GoRouter(
   routes: $appRoutes,
   debugLogDiagnostics: kDebugMode,
-  errorBuilder: (_, __) => const StartPage(),
+  errorBuilder: (_, _) => const StartPage(),
   observers: [RouteObserver<ModalRoute<void>>()],
 );
 
@@ -31,9 +31,9 @@ class StartRoute extends GoRouteData with $StartRoute {
       routes: [
         TypedGoRoute<ParkingSpaceRoute>(
           path: 'parking-space',
-        )
+        ),
       ],
-    )
+    ),
   ],
 )
 class CategoryRoute extends GoRouteData with $CategoryRoute {

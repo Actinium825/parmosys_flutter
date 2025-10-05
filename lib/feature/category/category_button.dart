@@ -41,14 +41,12 @@ class CategoryButton extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  SizedBox(
+                  Container(
                     height: categoryButtonBackgroundHeight,
                     width: categoryButtonBackgroundWidth,
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        color: isDarkMode ? cardButtonDarkColor : cardButtonLightColor,
-                        borderRadius: borderRadius,
-                      ),
+                    decoration: BoxDecoration(
+                      color: isDarkMode ? cardButtonDarkColor : cardButtonLightColor,
+                      borderRadius: borderRadius,
                     ),
                   ),
                   Positioned(
@@ -72,7 +70,7 @@ class CategoryButton extends StatelessWidget {
             parkingCategory.header,
             style: TextStyles.bold.copyWith(color: isDarkMode ? Colors.white : cardButtonLightColor),
             overflow: TextOverflow.ellipsis,
-          )
+          ),
         ],
       ),
     );

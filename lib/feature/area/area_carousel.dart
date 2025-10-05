@@ -33,18 +33,17 @@ class _AreaCarouselState extends ConsumerState<AreaCarousel> {
   @override
   Widget build(BuildContext context) {
     const verticalSpaceLarge = VerticalSpace(space: 64.0);
-    final selectedCategory = widget.selectedCategory;
-    final areas = selectedCategory.areas;
+    final areas = widget.selectedCategory.areas;
     final areaCount = areas.length;
 
     return Column(
       children: [
         FlutterCarousel.builder(
           itemCount: areaCount,
-          itemBuilder: (_, index, __) => AreaCard(
+          itemBuilder: (_, index, _) => AreaCard(
             isSelected: _currentIndexNotifier.value == index,
             area: areas[index],
-            imageUrl: selectedCategory.cardAreaImageUrl(index),
+            imageUrl: widget.selectedCategory.cardAreaImageUrl(index),
           ),
           options: FlutterCarouselOptions(
             viewportFraction: carouselViewportFraction,
@@ -56,19 +55,18 @@ class _AreaCarouselState extends ConsumerState<AreaCarousel> {
           ),
         ),
         verticalSpaceLarge,
-        Center(
-          child: SizedBox(
-            width: carouselIndicatorWidth,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: List.generate(
-                areaCount,
-                (index) => ValueListenableBuilder<int>(
-                  valueListenable: _currentIndexNotifier,
-                  builder: (_, currentIndex, __) => CircleAvatar(
-                    radius: carouselIndicatorRadius,
-                    backgroundColor: currentIndex == index ? activeIndicatorColor : inactiveIndicatorColor,
-                  ),
+        Container(
+          alignment: Alignment.center,
+          width: carouselIndicatorWidth,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: List.generate(
+              areaCount,
+              (index) => ValueListenableBuilder<int>(
+                valueListenable: _currentIndexNotifier,
+                builder: (_, currentIndex, _) => CircleAvatar(
+                  radius: carouselIndicatorRadius,
+                  backgroundColor: currentIndex == index ? activeIndicatorColor : inactiveIndicatorColor,
                 ),
               ),
             ),

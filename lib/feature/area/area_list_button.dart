@@ -59,7 +59,7 @@ class AreaListButton extends ConsumerWidget {
                     style: TextStyles.light,
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),
